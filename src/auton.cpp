@@ -26,9 +26,11 @@ namespace auton {
   }
 
   int skills() {
-    auton::deployTray();
+    //auton::deployTray();
     intake::spin(100);
-    drive::forward(100, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(60, 30.0, 0.6, 0.2, 17, 200);
+    wait(1, sec);
+    drive::forward(40, 30.0, 0.6, 0.2, 17, 200);
     wait(2, vex::seconds);
     drive::reset();
     wait(2, vex::seconds);
@@ -41,7 +43,7 @@ namespace auton {
     intake::r.stop(coast);
     tilter::move(770, 25, .6, 15, 500);
     wait(2, vex::seconds);
-    drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(-40, 30.0, 0.6, 0.2, 17, 200);
     return 1;
   }
 
