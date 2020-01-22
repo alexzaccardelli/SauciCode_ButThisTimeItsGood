@@ -6,11 +6,11 @@ namespace arm {
 
   void reset() {
     m = motor(PORT1, ratio36_1, false);
-    m.stop(hold);
+    m.stop(coast);
     m.resetRotation();
   }
-  void stop(vex::brakeType brake) {
-    m.stop(brake);
+  void stop() {
+    m.stop(coast);
   }
   void spin(double vel) {
     m.spin(fwd, vel, pct);
@@ -27,12 +27,12 @@ namespace arm {
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
         task h = task(blah);
-        spin(upVel);
-        while(con.ButtonX.pressing()) {}
+        while(con.ButtonX.pressing()) {
+          m.spin(fwd, upVel, pct);
+        }
         tilterTask.resume();
       }
       if(con.ButtonB.pressing()) {
-        spin(downVel);
         while(con.ButtonB.pressing()) {
           if(m.position(vex::deg) < 100) {
             tilterTask.suspend();
@@ -42,17 +42,18 @@ namespace arm {
             tilter::reset();
             tilterTask.resume();
           }
+          m.spin(fwd, downVel, pct);
         }
       }
-      stop();
+      m.stop(vex::hold);
       wait(5, msec);
     }
     return 1;
   }
 
   int move(double height, double max, double kP, double range, double time) {
-    stop();
-    double ticks = height, err, vel;
+    reset();
+    double ticks = height * 1.7, err, vel; //temporary
     timer t;
     while(1) {
       err = ticks - m.rotation(vex::deg);
@@ -68,7 +69,7 @@ namespace arm {
 
       wait(5, msec);
     }
-    stop();
+    reset();
     return 1;
   }
 }

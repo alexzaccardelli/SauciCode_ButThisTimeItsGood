@@ -14,11 +14,6 @@ namespace intake {
     r.resetRotation();
   }
 
-  void stop(vex::brakeType brake) {
-    l.stop(brake);
-    r.stop(brake);
-  }
-
   void spin(double vel) {
     l.spin(fwd, vel, pct);
     r.spin(fwd, vel, pct);

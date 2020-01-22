@@ -11,8 +11,8 @@ namespace tilter {
     m.resetRotation();
   }
 
-  void stop(vex::brakeType brake) {
-    m.stop(brake);
+  void stop() {
+    m.stop(vex::hold);
   }
 
   void spin(double vel) {
@@ -25,34 +25,40 @@ namespace tilter {
     while(1) {
       if(con.ButtonR1.pressing()) {
         intakeTask.suspend();
-        stop(coast);
+        intake::l.stop(coast);
+        intake::r.stop(coast);
         while(con.ButtonR1.pressing() && m.rotation(deg) < 770) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
+          if(m.rotation(deg) > 810) 
+            m.spin(fwd,-upVel, pct);
           else
             m.spin(fwd, upVel*k, pct);
         }
-        stop();
+        intake::l.stop(vex::hold);
+        intake::r.stop(vex::hold);
         intakeTask.resume();
       }
       if(con.ButtonR2.pressing()) {
         intakeTask.suspend();
-        stop(coast);
+        intake::l.stop(coast);
+        intake::r.stop(coast);
         while(con.ButtonR2.pressing()) {
           if(b.value() != 0)
             tilter::reset();
           m.spin(fwd, downVel, pct);
         }
-        stop();
+        intake::l.stop(vex::hold);
+        intake::r.stop(vex::hold);
         intakeTask.resume();
       }
-      stop();
+      m.stop(vex::hold);
     }
   }
 
   int move(double deg, double max, double kP, double range, double time) {
-    stop();
-    double ticks = deg, err=0, vel, lastErr;
+    //reset();
+    double ticks = deg, err, vel, lastErr;
     timer t, t1;
     while(1) {
       lastErr = err;
