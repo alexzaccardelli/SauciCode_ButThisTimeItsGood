@@ -27,10 +27,14 @@ namespace auton {
 
   int skills() {
     //auton::deployTray();
+        //auton::deployTray();
+
+    //intake 9
     intake::spin(100);
     drive::forward(60, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec);
     drive::forward(40, 30.0, 0.6, 0.2, 17, 200);
+    
     wait(2, vex::seconds);
     drive::reset();
     wait(2, vex::seconds);
@@ -38,12 +42,48 @@ namespace auton {
     drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
     drive::forward(21, 35.0, 0.6, 0.2, 17, 200);
 
-    //stacking
+    //stack
     intake::l.stop(coast);
     intake::r.stop(coast);
     tilter::move(770, 25, .6, 15, 500);
     wait(2, vex::seconds);
+
+    //back up after stacking
     drive::forward(-40, 30.0, 0.6, 0.2, 17, 200);
+    drive::turn(170, 75.0, 0.6, 0.2, 17, 200);
+    
+    //reset arm
+    tilter::move(-600, 25, .6, 15, 500); 
+    arm::move(130, 100, .8, 5, 100);
+    arm::m.spin(fwd, -100, pct);
+    while(arm::m.torque()) {}
+    arm::reset();
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    arm::reset();
+    
+    //intake cube 
+    intake::spin(100);
+    drive::forward(10, 30.0, 0.6, 0.2, 17, 200);
+    wait(1,sec);
+    intake::stop();
+    drive::forward(-8, 30.0, 0.6, 0.2, 17, 200);
+
+    //outtake cube a little bit so arm can clamp it
+    intake::spin(-50);
+    wait(500,msec);
+    intake::reset(); //will hold rollers
+    
+    //move arm up to tower
+    arm::move(500, 100, .8, 5, 100);//not sure how much arm needs to move
+    
+    //outtake cube into tower
+    intake::spin(-100);
+    wait(1,sec);
+    intake::stop();
+
+    
+
     return 1;
   }
 
