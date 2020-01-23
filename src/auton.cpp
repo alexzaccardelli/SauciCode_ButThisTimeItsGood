@@ -157,6 +157,7 @@ namespace auton {
     return 1;
   }
 
+  
   void onePoint(){
     drive::spin(-50);
     wait(500, msec);
