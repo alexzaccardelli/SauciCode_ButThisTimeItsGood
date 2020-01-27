@@ -5,12 +5,17 @@ namespace arm {
   motor m = motor(PORT14, ratio36_1, false);
 
   void reset() {
+<<<<<<< HEAD
     m = motor(PORT14, ratio36_1, false);
     m.stop(coast);
+=======
+    m = motor(PORT1, ratio36_1, false);
+    m.stop(hold);
+>>>>>>> parent of 2772123... Revert "1/22/20 2:29PM"
     m.resetRotation();
   }
-  void stop() {
-    m.stop(coast);
+  void stop(vex::brakeType brake) {
+    m.stop(brake);
   }
   void spin(double vel) {
     m.spin(fwd, vel, pct);
@@ -27,12 +32,12 @@ namespace arm {
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
         task h = task(blah);
-        while(con.ButtonX.pressing()) {
-          m.spin(fwd, upVel, pct);
-        }
+        spin(upVel);
+        while(con.ButtonX.pressing()) {}
         tilterTask.resume();
       }
       if(con.ButtonB.pressing()) {
+        spin(downVel);
         while(con.ButtonB.pressing()) {
           if(m.position(vex::deg) < 100) {
             tilterTask.suspend();
@@ -42,18 +47,17 @@ namespace arm {
             tilter::reset();
             tilterTask.resume();
           }
-          m.spin(fwd, downVel, pct);
         }
       }
-      m.stop(vex::hold);
+      stop();
       wait(5, msec);
     }
     return 1;
   }
 
   int move(double height, double max, double kP, double range, double time) {
-    reset();
-    double ticks = height * 1.7, err, vel; //temporary
+    stop();
+    double ticks = height, err, vel;
     timer t;
     while(1) {
       err = ticks - m.rotation(vex::deg);
@@ -69,7 +73,7 @@ namespace arm {
 
       wait(5, msec);
     }
-    reset();
+    stop();
     return 1;
   }
 }

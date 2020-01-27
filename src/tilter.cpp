@@ -11,8 +11,8 @@ namespace tilter {
     m.resetRotation();
   }
 
-  void stop() {
-    m.stop(vex::hold);
+  void stop(vex::brakeType brake) {
+    m.stop(brake);
   }
 
   void spin(double vel) {
@@ -25,40 +25,39 @@ namespace tilter {
     while(1) {
       if(con.ButtonR1.pressing()) {
         intakeTask.suspend();
-        intake::l.stop(coast);
-        intake::r.stop(coast);
+        stop(coast);
         while(con.ButtonR1.pressing() && m.rotation(deg) < 770) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
+<<<<<<< HEAD
           if(m.rotation(deg) > 1000) 
             m.spin(fwd,-upVel, pct);
+=======
+>>>>>>> parent of 2772123... Revert "1/22/20 2:29PM"
           else
             m.spin(fwd, upVel*k, pct);
         }
-        intake::l.stop(vex::hold);
-        intake::r.stop(vex::hold);
+        stop();
         intakeTask.resume();
       }
       if(con.ButtonR2.pressing()) {
         intakeTask.suspend();
-        intake::l.stop(coast);
-        intake::r.stop(coast);
+        stop(coast);
         while(con.ButtonR2.pressing()) {
           if(b.value() != 0)
             tilter::reset();
           m.spin(fwd, downVel, pct);
         }
-        intake::l.stop(vex::hold);
-        intake::r.stop(vex::hold);
+        stop();
         intakeTask.resume();
       }
-      m.stop(vex::hold);
+      stop();
     }
   }
 
   int move(double deg, double max, double kP, double range, double time) {
-    //reset();
-    double ticks = deg, err, vel, lastErr;
+    stop();
+    double ticks = deg, err=0, vel, lastErr;
     timer t, t1;
     while(1) {
       lastErr = err;
