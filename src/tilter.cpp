@@ -30,7 +30,7 @@ namespace tilter {
         while(con.ButtonR1.pressing() && m.rotation(deg) < 770) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
-          if(m.rotation(deg) > 810) 
+          if(m.rotation(deg) > 1000) 
             m.spin(fwd,-upVel, pct);
           else
             m.spin(fwd, upVel*k, pct);

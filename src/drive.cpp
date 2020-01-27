@@ -2,16 +2,16 @@
 using namespace vex;
 
 namespace drive {
-  motor l1 = motor(PORT15, ratio18_1, false);
+  motor l1 = motor(PORT5, ratio18_1, false);
   motor l2 = motor(PORT16, ratio18_1, false);
   motor r1 = motor(PORT20, ratio18_1, true);
   motor r2 = motor(PORT11, ratio18_1, true);
 
   void reset() {
-    motor l1 = motor(PORT15, ratio18_1, false);
+    /*motor l1 = motor(PORT15, ratio18_1, false);
     motor l2 = motor(PORT16, ratio18_1, false);
     motor r1 = motor(PORT20, ratio18_1, true);
-    motor r2 = motor(PORT11, ratio18_1, true);
+    motor r2 = motor(PORT11, ratio18_1, true);*/
     l1.stop(coast);
     l2.stop(coast);
     r1.stop(coast);
@@ -108,15 +108,31 @@ namespace drive {
 
   int turn(double deg, double max, double accel, double kP, double range, double time) {
     reset();
-    double ticks = deg * (360.0/135.0);
+    //double ticks = deg * (360.0/135.0);
+    double ticks = deg * (250.0/90.0); 
     double lErr, rErr, lVel, rVel;
-    timer t;
+    double rotations = l1.rotation(vex::deg);
+    timer t, t1;
     while(1) {
-      lErr = ticks - l1.rotation(vex::deg);
-      rErr = -(ticks - l1.rotation(vex::deg));
+    if(fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
+      rotations = -1*r1.rotation(vex::deg);
+    else
+      rotations = l1.rotation(vex::deg);
 
-      lVel = kP*lErr;
-      rVel = kP*rErr;
+      lErr = ticks - rotations;
+      rErr = -(ticks - rotations);
+
+      
+      if(lErr * kP > max) lVel = max;
+      else if(lErr * kP < -max) lVel = -max;
+      else if(lErr * kP > lVel) lVel += accel;
+      else if(lErr * kP < lVel) lVel -= accel;
+      if(rErr * kP > max) rVel = max;
+      else if(rErr * kP < -max) rVel = -max;
+      else if(rErr * kP > rVel) rVel += accel;
+      else if(rErr * kP < rVel) rVel -= accel;
+      /*lVel = lErr * kP;
+      rVel = rErr * kP;*/
 
       l1.spin(fwd, lVel, pct);
       l2.spin(fwd, lVel, pct);
@@ -125,10 +141,11 @@ namespace drive {
 
       if(fabs(lErr) > range || fabs(rErr) > range) t.reset();
       if(t.time(msec) > time) break;
+      if(t1.time(msec) > 5000) break;
 
       wait(5, msec);
     }
-    reset();
+    spin(0);
     return 1;
   }
 }
