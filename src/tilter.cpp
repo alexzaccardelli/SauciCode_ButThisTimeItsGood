@@ -6,7 +6,7 @@ namespace tilter {
   bool complete = false;
 
   void reset() {
-    m = motor(PORT2, ratio36_1, false);
+    //m = motor(PORT2, ratio36_1, false);
     m.stop(vex::hold);
     m.resetRotation();
   }
@@ -29,11 +29,6 @@ namespace tilter {
         while(con.ButtonR1.pressing() && m.rotation(deg) < 770) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
-<<<<<<< HEAD
-          if(m.rotation(deg) > 1000) 
-            m.spin(fwd,-upVel, pct);
-=======
->>>>>>> parent of 2772123... Revert "1/22/20 2:29PM"
           else
             m.spin(fwd, upVel*k, pct);
         }

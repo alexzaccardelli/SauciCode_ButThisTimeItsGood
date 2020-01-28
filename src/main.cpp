@@ -8,6 +8,7 @@ task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 int printInfo() {
   while (true) {
+    
     printf("L1: %f\n", drive::l1.rotation(vex::deg));
     printf("L2: %f\n", drive::l2.rotation(vex::deg));
     printf("R1: %f\n", drive::r1.rotation(vex::deg));

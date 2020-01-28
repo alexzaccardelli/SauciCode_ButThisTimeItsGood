@@ -6,8 +6,8 @@ namespace intake {
   motor r = motor(PORT4, ratio36_1, true);
 
   void reset() {
-    l = motor(PORT3, ratio18_1, false);
-    r = motor(PORT4, ratio18_1, true);
+    //l = motor(PORT3, ratio18_1, false);
+    //r = motor(PORT4, ratio18_1, true);
     l.stop(hold);
     r.stop(hold);
     l.resetRotation();

@@ -5,13 +5,13 @@ namespace arm {
   motor m = motor(PORT14, ratio36_1, false);
 
   void reset() {
-<<<<<<< HEAD
-    m = motor(PORT14, ratio36_1, false);
+
+    //m = motor(PORT14, ratio36_1, false);
     m.stop(coast);
-=======
-    m = motor(PORT1, ratio36_1, false);
-    m.stop(hold);
->>>>>>> parent of 2772123... Revert "1/22/20 2:29PM"
+
+    //m = motor(PORT1, ratio36_1, false);
+    //m.stop(hold);
+
     m.resetRotation();
   }
   void stop(vex::brakeType brake) {
