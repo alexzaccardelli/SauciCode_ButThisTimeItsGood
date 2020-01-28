@@ -6,7 +6,8 @@ namespace drive {
   extern motor l1, l2, r1, r2;
 
   void reset();
-
+  void stop();
+  
   void spin(int vel);
   void spinRight(int vel);
   void spinLeft(int vel);
