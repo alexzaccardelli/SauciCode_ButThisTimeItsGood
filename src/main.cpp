@@ -36,7 +36,7 @@ void usercontrol(void) {
   cpu.Screen.clearScreen();
   cpu.Screen.setCursor(5,5);
   cpu.Screen.print("%f", t.time(msec));*/
-  auton::skills();
+  auton::small();
   /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
