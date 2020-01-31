@@ -63,20 +63,20 @@ namespace auton {
   int skills() {
     //auton::deployTray();
     intake::spin(100);
-    drive::forward(60, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(63, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec);
-    drive::forward(40, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(47, 30.0, 0.6, 0.2, 17, 200);
     wait(2, vex::seconds);
     drive::reset();
     wait(2, vex::seconds);
     intake::reset();
-    drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
-    drive::forward(21, 35.0, 0.6, 0.2, 17, 200);
+    drive::turn(43, 65.0, 0.6, 0.2, 17, 200);
+    drive::forward(19, 35.0, 0.6, 0.2, 17, 200);
 
     //stacking
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(770, 25, .6, 15, 500);
+    tilter::move(797, 25, .6, 15, 500);
     wait(2, vex::seconds);
     drive::forward(-40, 30.0, 0.6, 0.2, 17, 200);
     return 1;
