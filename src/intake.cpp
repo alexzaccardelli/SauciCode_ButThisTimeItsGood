@@ -2,8 +2,8 @@
 using namespace vex;
 
 namespace intake {
-  motor l = motor(PORT3, ratio36_1, false);
-  motor r = motor(PORT4, ratio36_1, true);
+  motor l = motor(PORT12, ratio36_1, false);
+  motor r = motor(PORT11, ratio36_1, true);
 
   void reset() {
     //l = motor(PORT3, ratio18_1, false);

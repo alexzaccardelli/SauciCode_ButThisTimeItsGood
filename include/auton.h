@@ -9,7 +9,7 @@ namespace auton {
   };
 
   void resetAll();
-
+  void small();
   int deployTray();
   int op();
   int skills();

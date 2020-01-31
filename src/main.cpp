@@ -30,14 +30,22 @@ void usercontrol(void) {
   }*/
   //intake::spin(-100);
   //arm::move(170, 100, .8, 5, 100);
-  driveTask = task(drive::op);
+  /*timer t;
+  t.reset();
+  auton::deployTray();
+  cpu.Screen.clearScreen();
+  cpu.Screen.setCursor(5,5);
+  cpu.Screen.print("%f", t.time(msec));*/
+  auton::small();
+  /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
   autonTask = task(auton::op);
   while (1) {
     wait(5, msec);
-  }
+    printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
+  }*/
 }
 
 void pre_auton(void) {

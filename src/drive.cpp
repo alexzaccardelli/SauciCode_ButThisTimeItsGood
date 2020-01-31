@@ -2,10 +2,10 @@
 using namespace vex;
 
 namespace drive {
-motor l1 = motor(PORT5, ratio18_1, false);
-motor l2 = motor(PORT16, ratio18_1, false);
-motor r1 = motor(PORT20, ratio18_1, true);
-motor r2 = motor(PORT11, ratio18_1, true);
+motor l1 = motor(PORT1, ratio18_1, false);
+motor l2 = motor(PORT17, ratio18_1, false);
+motor r1 = motor(PORT2, ratio18_1, true);
+motor r2 = motor(PORT14, ratio18_1, true);
 
 void reset() {
   /*motor l1 = motor(PORT15, ratio18_1, false);

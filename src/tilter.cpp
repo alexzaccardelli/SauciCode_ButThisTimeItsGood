@@ -2,7 +2,7 @@
 using namespace vex;
 
 namespace tilter {
-  motor m = motor(PORT2, ratio36_1, false);
+  motor m = motor(PORT16, ratio36_1, false);
   bool complete = false;
 
   void reset() {
@@ -39,8 +39,6 @@ namespace tilter {
         intakeTask.suspend();
         stop(coast);
         while(con.ButtonR2.pressing()) {
-          if(b.value() != 0)
-            tilter::reset();
           m.spin(fwd, downVel, pct);
         }
         stop();
