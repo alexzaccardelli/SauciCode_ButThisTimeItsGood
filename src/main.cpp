@@ -10,17 +10,21 @@ int printInfo() {
   while (true) {
     
     printf("L1: %f\n", drive::l1.rotation(vex::deg));
-    printf("L2: %f\n", drive::l2.rotation(vex::deg));
-    printf("R1: %f\n", drive::r1.rotation(vex::deg));
-    printf("R2: %f\n", drive::r2.rotation(vex::deg));
+    
+    //printf("L2: %f\n", drive::l2.rotation(vex::deg));
+    //printf("R1: %f\n", drive::r1.rotation(vex::deg));
+    //printf("R2: %f\n", drive::r2.rotation(vex::deg));
     wait(15, vex::msec);
   }
 }
 void usercontrol(void) {
-  /*timer t;
-  auton::resetAll();
-  auton::skills();
-  printf("%f\n",t.time(msec));*/
+  timer clown;
+ //task printI = task(printInfo);
+ //while(1) {wait(5,msec);}
+ //drive::turn(43, 65.0, 0.6, 0.2, 17, 200);
+  
+   auton::skills();
+  //printf("%f\n",clown.time(msec));
   /*drive::reset();
   task printI = task(printInfo);
   wait(1, sec);
@@ -36,7 +40,7 @@ void usercontrol(void) {
   cpu.Screen.clearScreen();
   cpu.Screen.setCursor(5,5);
   cpu.Screen.print("%f", t.time(msec));*/
-  auton::skills();
+  //auton::small();
   /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
@@ -55,7 +59,7 @@ void pre_auton(void) {
 
 void autonomous(void) {
   auton::resetAll();
-  auton::blueSmall();
+  auton::skills();
   auton::resetAll();
 }
 

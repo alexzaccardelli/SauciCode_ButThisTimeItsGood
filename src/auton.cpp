@@ -61,16 +61,28 @@ namespace auton {
   }
 
   int skills() {
+    /*intake::spin(100);
     //auton::deployTray();
-    intake::spin(100);
-    drive::forward(63, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(65, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec);
-    drive::forward(47, 30.0, 0.6, 0.2, 17, 200);
+    //drive::forward(47, 25.0, 0.6, 0.2, 17, 200);
+    drive::forward(18, 25.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    drive::forward(-1, 25.0, 0.6, 0.2, 17, 200);
+    //printf("N: %f\n", drive::l1.rotation(vex::degrees));
+    drive::reset();
+    drive::forward(19, 25.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    drive::forward(-4, 25.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    drive::forward(15, 25.0, 0.6, 0.2, 17, 200);
+    drive::reset();
     wait(2, vex::seconds);
     drive::reset();
     wait(2, vex::seconds);
     intake::reset();
     drive::turn(43, 65.0, 0.6, 0.2, 17, 200);
+    //printf("%f\n",drive::l1.rotation(vex::deg));
     drive::forward(19, 35.0, 0.6, 0.2, 17, 200);
 
     //stacking
@@ -78,7 +90,11 @@ namespace auton {
     intake::r.stop(coast);
     tilter::move(797, 25, .6, 15, 500);
     wait(2, vex::seconds);
-    drive::forward(-40, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(-12, 30.0, 0.6, 0.2, 17, 200);*/
+    // drive::turn(-135, 65.0, 0.6, 0.2, 17, 200);
+    drive::forward(30, 35.0, 0.6, 0.2, 17, 200);
+   drive::turn(-90, 65.0, 0.6, 0.2, 17, 200);
+
     return 1;
   }
 

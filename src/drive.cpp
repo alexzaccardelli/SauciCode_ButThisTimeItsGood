@@ -92,11 +92,13 @@ int forward(double dist, double max, double accel, double kP, double range,
             double time) {
   reset();
   double ticks = dist / (2 * 3.1415 * 1.93) * 360.0;
-  double lErr, rErr, lVel, rVel;
+  double lErr = 0, rErr = 0, lVel = 0, rVel = 0;
   timer t;
   while (1) {
     lErr = ticks - l1.rotation(deg);
     rErr = ticks - l1.rotation(deg);
+    //lVel = lErr;
+    //rVel = rErr;
 
     if (lErr * kP > max)
       lVel = max;
@@ -106,6 +108,7 @@ int forward(double dist, double max, double accel, double kP, double range,
       lVel += accel;
     else if (lErr * kP < lVel)
       lVel -= accel;
+      /*
     if (rErr * kP > max)
       rVel = max;
     else if (rErr * kP < -max)
@@ -114,7 +117,8 @@ int forward(double dist, double max, double accel, double kP, double range,
       rVel += accel;
     else if (rErr * kP < rVel)
       rVel -= accel;
-
+  */
+  rVel = lVel;
     l1.spin(fwd, lVel, pct);
     l2.spin(fwd, lVel, pct);
     r1.spin(fwd, rVel, pct);
@@ -127,6 +131,7 @@ int forward(double dist, double max, double accel, double kP, double range,
 
     wait(5, msec);
   }
+  printf("N: %f\n", drive::l1.rotation(vex::degrees));
   reset();
   return 1;
 }
@@ -136,12 +141,12 @@ int turn(double deg, double max, double accel, double kP, double range,
   reset();
   // double ticks = deg * (360.0/135.0);
   double ticks = deg * (250.0 / 90.0);
-  double lErr, rErr, lVel, rVel;
+  double lErr=0, rErr=0, lVel=0, rVel=0;
   double rotations = l1.rotation(vex::deg);
   timer t, t1;
   while (1) {
     if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
-      rotations = -1 * r1.rotation(vex::deg);
+      rotations = -1* l1.rotation(vex::deg);
     else
       rotations = l1.rotation(vex::deg);
 
@@ -164,8 +169,9 @@ int turn(double deg, double max, double accel, double kP, double range,
       rVel += accel;
     else if (rErr * kP < rVel)
       rVel -= accel;
-    /*lVel = lErr * kP;
-    rVel = rErr * kP;*/
+
+    lVel = lErr * kP;
+    rVel = rErr * kP;
 
     l1.spin(fwd, lVel, pct);
     l2.spin(fwd, lVel, pct);
