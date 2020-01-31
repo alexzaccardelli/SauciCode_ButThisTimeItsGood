@@ -32,6 +32,11 @@ namespace auton {
     tilter::reset();*/
     return 1;
   }
+  int a() {
+    wait(1,sec);
+    
+    return 1;
+  }
   
   void small() {
     timer t;
@@ -39,18 +44,16 @@ namespace auton {
   
     deployTray();
     intake::spin(100);
-    drive::forward(42.5, 35.0, 0.6, 0.2, 17, 100);
+    drive::forward(40, 35.0, 0.6, 0.2, 17, 100);
     intake::reset();
-    drive::forward(-29.5, 100.0, 0.6, 0.2, 17, 100);
+    drive::forward(-27, 100.0, 0.6, 0.2, 17, 100);
     wait(100, msec);
     drive::turn(-128, 75.0, 0.6, 0.2, 20, 100);
     drive::forward(14, 40.0, 0.6, 0.2, 17, 100);
     tilter::move(600, 100, .8, 15, 100);
     tilter::move(850, 40, .8, 15, 100);
     
-    drive::spin(-20);
-    while(t.time(msec) < 15000) {}
-    drive::reset();
+    drive::forward(-5, 20.0, 0.6, 0.2, 17, 100);
     cpu.Screen.clearScreen();
   cpu.Screen.setCursor(5,5);
   cpu.Screen.print("%f", t.time(msec));

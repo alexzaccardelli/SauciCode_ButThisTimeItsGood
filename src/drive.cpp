@@ -140,15 +140,15 @@ int turn(double deg, double max, double accel, double kP, double range,
   double rotations = l1.rotation(vex::deg);
   timer t, t1;
   while (1) {
-    /*if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
+    if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
       rotations = -1 * r1.rotation(vex::deg);
-    else*/
+    else
       rotations = l1.rotation(vex::deg);
 
     lErr = ticks - rotations;
     rErr = -(ticks - rotations);
 
-    /*if (lErr * kP > max)
+    if (lErr * kP > max)
       lVel = max;
     else if (lErr * kP < -max)
       lVel = -max;
@@ -163,9 +163,9 @@ int turn(double deg, double max, double accel, double kP, double range,
     else if (rErr * kP > rVel)
       rVel += accel;
     else if (rErr * kP < rVel)
-      rVel -= accel;*/
-    lVel = lErr * kP;
-    rVel = rErr * kP;
+      rVel -= accel;
+    /*lVel = lErr * kP;
+    rVel = rErr * kP;*/
 
     l1.spin(fwd, lVel, pct);
     l2.spin(fwd, lVel, pct);
