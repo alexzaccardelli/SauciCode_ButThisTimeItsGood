@@ -30,24 +30,12 @@ namespace arm {
     double upVel = 100, downVel = -100;
     while(1) {
       if(con.ButtonX.pressing()) {
-        tilterTask.suspend();
-        task h = task(blah);
         spin(upVel);
-        while(con.ButtonX.pressing()) {}
-        tilterTask.resume();
+        while(con.ButtonX.pressing()) wait(5,msec);
       }
       if(con.ButtonB.pressing()) {
         spin(downVel);
-        while(con.ButtonB.pressing()) {
-          if(m.position(vex::deg) < 100) {
-            tilterTask.suspend();
-            limit b = limit(cpu.ThreeWirePort.A);
-            tilter::spin(-100);
-            while(b.value() == 0) {}
-            tilter::reset();
-            tilterTask.resume();
-          }
-        }
+        while(con.ButtonB.pressing()) wait(5,msec);
       }
       stop();
       wait(5, msec);

@@ -21,21 +21,23 @@ void usercontrol(void) {
   auton::resetAll();
   auton::skills();
   printf("%f\n",t.time(msec));*/
-  drive::reset();
+  /*drive::reset();
   task printI = task(printInfo);
   wait(1, sec);
   drive::turn(90, 25.0, 0.4, 0.2, 5, 200);
   while (true) {
     wait(5, msec);
-  }
-  /*driveTask = task(drive::op);
+  }*/
+  //intake::spin(-100);
+  //arm::move(170, 100, .8, 5, 100);
+  driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
   autonTask = task(auton::op);
   while (1) {
     wait(5, msec);
-  }*/
+  }
 }
 
 void pre_auton(void) {
