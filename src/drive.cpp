@@ -191,6 +191,48 @@ int turn(double deg, double max, double accel, double kP, double range,
   return 1;
 }
 
+int turnEasy(double deg, double max) {
+  double kP=0.6, range=5, time=100;
+  reset();
+  double ticks = deg * (250.0 / 90.0);
+  double lErr=0, rErr=0, lVel=0, rVel=0;
+  double rotations = l1.rotation(vex::deg);
+  timer t, t1;
+  while (1) {
+    if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
+      rotations = -1* l1.rotation(vex::deg);
+    else
+      rotations = l1.rotation(vex::deg);
+
+    lErr = ticks - rotations;
+    rErr = -(ticks - rotations);
+
+    if (lErr * kP > max) lVel = max;
+    else if (lErr * kP < -max) lVel = -max;
+    if (rErr * kP > max) rVel = max;
+    else if (rErr * kP < -max) rVel = -max;
+
+    lVel = lErr * kP;
+    rVel = rErr * kP;
+
+    l1.spin(fwd, lVel, pct);
+    l2.spin(fwd, lVel, pct);
+    r1.spin(fwd, rVel, pct);
+    r2.spin(fwd, rVel, pct);
+
+    if (fabs(lErr) > range || fabs(rErr) > range)
+      t.reset();
+    if (t.time(msec) > time)
+      break;
+    if (t1.time(msec) > 5000)
+      break;
+
+    wait(5, msec);
+  }
+  reset();
+  return 1;
+}
+
 void untilHitWall(double speed) {
   double threshold = 7.0;
   drive::l1.spin(vex::fwd, speed, vex::pct);
