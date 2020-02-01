@@ -4,18 +4,19 @@ using namespace vex;
 
 namespace auton {
   enum {
-    red = 1,
-    blue = -1
+    red = -1,
+    blue = 1
   };
 
   void resetAll();
-  void small();
+  void small(int side);
   int deployTray();
   int op();
   int skills();
   int redSmall();
   int blueSmall();
   void onePoint();
+  int tower();
 }
 
 #endif

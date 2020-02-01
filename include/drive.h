@@ -4,6 +4,9 @@ using namespace vex;
 
 namespace drive {
   extern motor l1, l2, r1, r2;
+  extern encoder enc;
+  extern sonar sonic;
+
 
   void reset();
   void stop();
@@ -11,10 +14,12 @@ namespace drive {
   void spin(int vel);
   void spinRight(int vel);
   void spinLeft(int vel);
+  void untilHitWall(double speed);
 
   int turn(double deg, double max, double accel, double kP, double range, double time);
   int turnEasy(double deg, double max);
   int forward(double dist, double max, double accel, double kP, double range, double time);
+  int forwardEasy(double dist, double max);
 
   int op();
 }

@@ -1,3 +1,4 @@
+
 #include "vex.h"
 using namespace vex;
 
@@ -18,7 +19,7 @@ namespace auton {
     tilter::m.spin(fwd, -100, pct);
     while(tilter::m.torque() < 1.9) {}
     tilter::reset();
-    arm::move(100, 100, .8, 5, 100);
+    arm::move(150, 100, .8, 5, 100);
     arm::m.spin(fwd, -100, pct);
     while(arm::m.torque() < 2.05) {}
     arm::reset();
@@ -38,51 +39,52 @@ namespace auton {
     return 1;
   }
   
-  void small() {
+  void small(int side) {
     timer t;
     t.reset();
   
     deployTray();
     intake::spin(100);
-    drive::forward(42.5, 35.0, 0.6, 0.2, 17, 100);
+    drive::forwardEasy(43.5, 30.0);
     intake::reset();
-    drive::forward(-29.5, 100.0, 0.6, 0.2, 17, 100);
-    drive::turnEasy(-128, 75.0);
-    drive::forward(14, 40.0, 0.6, 0.2, 17, 100);
+    drive::forwardEasy(-28, 80.0);
+    if(side == red) drive::turnEasy(132, 75.0);
+    else drive::turnEasy(-123, 75.0);
+    drive::forwardEasy(13.5, 40.0);
     tilter::move(600, 100, .8, 15, 100);
     tilter::move(850, 40, .8, 15, 100);
     drive::spin(-20);
-    while(t.time(msec) < 15000) {}
-    drive::reset();
-
     cpu.Screen.clearScreen();
     cpu.Screen.setCursor(5,5);
     cpu.Screen.print("%f", t.time(msec));
+    while(t.time(msec) < 15000) {}
+    drive::reset();
+
+    
   }
 
   int skills() {
-    /*intake::spin(100);
+    drive::spin(-30);
     //auton::deployTray();
-    drive::forward(65, 30.0, 0.6, 0.2, 17, 200);
+
+    //intake 10 cubes
+    drive::spin(-30);
+    wait(750,msec);
+    drive::reset();
+    intake::spin(100);
+    drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec);
-    //drive::forward(47, 25.0, 0.6, 0.2, 17, 200);
-    drive::forward(18, 25.0, 0.6, 0.2, 17, 200);
-    drive::reset();
-    drive::forward(-1, 25.0, 0.6, 0.2, 17, 200);
-    //printf("N: %f\n", drive::l1.rotation(vex::degrees));
-    drive::reset();
-    drive::forward(19, 25.0, 0.6, 0.2, 17, 200);
-    drive::reset();
-    drive::forward(-4, 25.0, 0.6, 0.2, 17, 200);
-    drive::reset();
-    drive::forward(15, 25.0, 0.6, 0.2, 17, 200);
-    drive::reset();
-    wait(2, vex::seconds);
+    drive::forwardEasy(15, 25.0);
+    drive::forwardEasy(15, 25.0);
+    drive::forwardEasy(15, 25.0);
+    drive::forwardEasy(10, 25.0);
+
     drive::reset();
     wait(2, vex::seconds);
     intake::reset();
-    drive::turn(43, 65.0, 0.6, 0.2, 17, 200);
-    //printf("%f\n",drive::l1.rotation(vex::deg));
+
+    //turn towards goal zone
+    drive::turnEasy(43,25);
     drive::forward(19, 35.0, 0.6, 0.2, 17, 200);
 
     //stacking
@@ -90,11 +92,78 @@ namespace auton {
     intake::r.stop(coast);
     tilter::move(797, 25, .6, 15, 500);
     wait(2, vex::seconds);
-    drive::forward(-12, 30.0, 0.6, 0.2, 17, 200);*/
-    // drive::turn(-135, 65.0, 0.6, 0.2, 17, 200);
-    drive::forward(30, 35.0, 0.6, 0.2, 17, 200);
-   drive::turn(-90, 65.0, 0.6, 0.2, 17, 200);
+    
+    //drive away from goal zone 
+    drive::forward(-14, 30.0, 0.6, 0.2, 17, 200);
 
+    //turn to align with wall, hit wall
+    drive::turn(-135, 65.0, 0.6, 0.2, 17, 200);
+    drive::untilHitWall(-50);
+    
+    //drive forward
+    drive::forward(29, 35.0, 0.6, 0.2, 17, 200);
+
+    //turn towards tower 
+    drive::turn(-90, 25.0, 0.6, 0.2, 10, 200);
+
+    //move tilter back
+    tilter::m.spin(fwd, -100, pct);
+    while(tilter::m.torque() < 1.9) {}
+    tilter::reset();
+
+    intake::spin(100);
+
+    //drive towards the tower 
+    drive::forward(35, 35.0, 0.6, 0.2, 17, 200);
+    drive::forward(8, 15.0, 0.6, 0.2, 17, 200);
+    wait(2, sec);
+    drive::forward(-4, 15.0, 0.6, 0.2, 17, 200);
+
+    //intake cube and place in tower 
+    intake::spin(100);
+    wait(500, msec);
+    intake::reset();
+    wait(500,msec);
+    intake::spin(-50);
+    wait(700, msec);
+    intake::reset();
+    tower();
+
+    //drive back until it hits the wall
+    drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
+    drive::untilHitWall(-50);
+
+    
+    drive::forward(23, 50.0, 0.6, 0.2, 17, 200);
+    drive::turn(95, 50.0, 0.6, 0.2, 10, 200);
+    drive::forward(-24, 50.0, 0.6, 0.2, 17, 200);
+    drive::untilHitWall(-50);
+    tilter::m.spin(fwd, -100, pct);
+    while(tilter::m.torque() < 1.9) {}
+    tilter::reset();
+    intake::spin(100);
+    drive::forward(58, 25.0, 0.6, 0.2, 17, 200);
+    drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
+    drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
+    drive::untilHitWall(-50);
+    drive::forward(34, 25.0, 0.6, 0.2, 17, 200);
+    drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
+    drive::forward(28, 25.0, 0.6, 0.2, 17, 200);
+    drive::untilHitWall(50);
+    drive::forward(-12, 25.0, 0.6, 0.2, 17, 200);
+
+    intake::spin(100);
+    wait(500, msec);
+    intake::reset();
+    wait(500,msec);
+    intake::spin(-50);
+    wait(700, msec);
+    intake::reset();
+    tower();
+    drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
+    while(1){
+      printf("%f\n", drive::sonic.distance(vex::inches));
+    }
     return 1;
   }
 
@@ -176,5 +245,26 @@ namespace auton {
     wait(500,msec);
     drive::reset();
     auton::deployTray();
+  }
+
+  int tower(){
+  intake::l.setBrake(hold);
+  intake::r.setBrake(hold);
+  wait(500, msec);
+  arm::move(520,100,0.8,5,100);
+ // drive::forwardEasy(12, 20.0);
+  drive::spin(15);
+  wait(2, sec);
+  drive::reset();
+  intake::spin(-25);
+
+  wait(1,sec);
+  arm::move(650,100,0.8,5,100);
+  intake::reset();
+
+  drive::forwardEasy(-10, 50.0);
+  arm::m.spin(fwd, -100, pct);
+  wait(100, msec);
+  return 0; 
   }
 }

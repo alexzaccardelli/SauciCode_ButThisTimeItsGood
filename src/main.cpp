@@ -23,7 +23,7 @@ void usercontrol(void) {
  //while(1) {wait(5,msec);}
  //drive::turn(43, 65.0, 0.6, 0.2, 17, 200);
   
-   auton::skills();
+   //auton::skills();
   //printf("%f\n",clown.time(msec));
   /*drive::reset();
   task printI = task(printInfo);
@@ -40,7 +40,9 @@ void usercontrol(void) {
   cpu.Screen.clearScreen();
   cpu.Screen.setCursor(5,5);
   cpu.Screen.print("%f", t.time(msec));*/
-  //auton::small();
+  
+  //auton::small(auton::red);
+  auton::skills();
   /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
@@ -48,7 +50,8 @@ void usercontrol(void) {
   autonTask = task(auton::op);
   while (1) {
     wait(5, msec);
-    printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
+    //printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
+    //printf("%f\n", drive::enc.rotation(deg));
   }*/
 }
 

@@ -6,6 +6,8 @@ motor l1 = motor(PORT1, ratio18_1, false);
 motor l2 = motor(PORT17, ratio18_1, false);
 motor r1 = motor(PORT2, ratio18_1, true);
 motor r2 = motor(PORT14, ratio18_1, true);
+encoder enc = encoder(cpu.ThreeWirePort.C);
+sonar sonic = sonar(cpu.ThreeWirePort.A);
 
 void reset() {
   /*motor l1 = motor(PORT15, ratio18_1, false);
@@ -20,6 +22,7 @@ void reset() {
   l2.resetRotation();
   r1.resetRotation();
   r2.resetRotation();
+  enc.resetRotation();
 }
 
 void stop() {
@@ -86,8 +89,39 @@ int op() {
 
     wait(5, msec);
   }
+    drive::forward(-29.5, 100.0, 0.6, 0.2, 17, 100);
 }
+int forwardEasy(double dist, double max) {
+  reset();
+  double kP = 0.15, range = 17, time = 100;
+  double ticks = dist / (2.0 * 3.145 * 1.625) * 360.0;
+  double err = 0, vel = 0;
+  timer t;
+  while (1) {
+    err = ticks - enc.rotation(deg);
 
+    if (err * kP > max)
+      vel = max;
+    else if (err * kP < -max)
+      vel = -max;
+    else vel = err * kP;
+
+    l1.spin(fwd, vel, pct);
+    l2.spin(fwd, vel, pct);
+    r1.spin(fwd, vel, pct);
+    r2.spin(fwd, vel, pct);
+
+    if (fabs(err) > range)
+      t.reset();
+    if (t.time(msec) > time)
+      break;
+
+    wait(5, msec);
+  }
+  reset();
+  printf("fwd: %f", err);
+  return 1;
+}
 int forward(double dist, double max, double accel, double kP, double range,
             double time) {
   reset();
@@ -95,8 +129,8 @@ int forward(double dist, double max, double accel, double kP, double range,
   double lErr = 0, rErr = 0, lVel = 0, rVel = 0;
   timer t;
   while (1) {
-    lErr = ticks - l1.rotation(deg);
-    rErr = ticks - l1.rotation(deg);
+    lErr = ticks - enc.rotation(deg);
+    rErr = ticks - enc.rotation(deg);
     //lVel = lErr;
     //rVel = rErr;
 
@@ -145,9 +179,9 @@ int turn(double deg, double max, double accel, double kP, double range,
   double rotations = l1.rotation(vex::deg);
   timer t, t1;
   while (1) {
-    if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
+    /*if (fabs(enc.rotation(vex::deg)) < fabs(enc.rotation(vex::deg)))
       rotations = -1* l1.rotation(vex::deg);
-    else
+    else*/
       rotations = l1.rotation(vex::deg);
 
     lErr = ticks - rotations;
@@ -192,16 +226,16 @@ int turn(double deg, double max, double accel, double kP, double range,
 }
 
 int turnEasy(double deg, double max) {
-  double kP=0.6, range=5, time=100;
+  double kP=0.25, range=5, time=100;
   reset();
   double ticks = deg * (250.0 / 90.0);
   double lErr=0, rErr=0, lVel=0, rVel=0;
   double rotations = l1.rotation(vex::deg);
   timer t, t1;
   while (1) {
-    if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
+    /*if (fabs(l1.rotation(vex::deg)) < fabs(r1.rotation(vex::deg)))
       rotations = -1* l1.rotation(vex::deg);
-    else
+    else*/
       rotations = l1.rotation(vex::deg);
 
     lErr = ticks - rotations;
@@ -209,11 +243,10 @@ int turnEasy(double deg, double max) {
 
     if (lErr * kP > max) lVel = max;
     else if (lErr * kP < -max) lVel = -max;
+    else lVel = lErr * kP;
     if (rErr * kP > max) rVel = max;
     else if (rErr * kP < -max) rVel = -max;
-
-    lVel = lErr * kP;
-    rVel = rErr * kP;
+    else rVel = rErr * kP;
 
     l1.spin(fwd, lVel, pct);
     l2.spin(fwd, lVel, pct);
@@ -230,6 +263,7 @@ int turnEasy(double deg, double max) {
     wait(5, msec);
   }
   reset();
+  printf("turn: %f  %f", lErr, rErr);
   return 1;
 }
 
@@ -248,6 +282,7 @@ void untilHitWall(double speed) {
         drive::r2.torque(vex::torqueUnits::InLb) > threshold)
       hit = true;
   }
+  wait(500,msec);
   reset();
 }
 } // namespace drive
