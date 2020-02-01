@@ -119,7 +119,7 @@ namespace auton {
     wait(2, sec);
     drive::forward(-4, 15.0, 0.6, 0.2, 17, 200);
 
-    //intake cube and place in tower 
+    //intake cube and place in first tower 
     intake::spin(100);
     wait(500, msec);
     intake::reset();
@@ -133,25 +133,42 @@ namespace auton {
     drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
 
-    
+    //drive forward and turn toward second tower
     drive::forward(23, 50.0, 0.6, 0.2, 17, 200);
     drive::turn(95, 50.0, 0.6, 0.2, 10, 200);
+
+    //move backward to align with the wall
     drive::forward(-24, 50.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
+
+    //move tray back
     tilter::m.spin(fwd, -100, pct);
     while(tilter::m.torque() < 1.9) {}
     tilter::reset();
+
+    //drive toward second tower
     intake::spin(100);
     drive::forward(58, 25.0, 0.6, 0.2, 17, 200);
+
+    //back up from the second tower
     drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
+
+    //turn left and back up to align with the base wall
     drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
     drive::untilHitWall(-50);
+
+    //move forward until parallel with third tower
     drive::forward(34, 25.0, 0.6, 0.2, 17, 200);
+
+    //turn toward third tower
     drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
+
+    //hit tower
     drive::forward(28, 25.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(50);
-    drive::forward(-12, 25.0, 0.6, 0.2, 17, 200);
 
+    //move back to put cube in third tower
+    drive::forward(-12, 25.0, 0.6, 0.2, 17, 200);
     intake::spin(100);
     wait(500, msec);
     intake::reset();
@@ -160,10 +177,13 @@ namespace auton {
     wait(700, msec);
     intake::reset();
     tower();
-    drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
-    while(1){
+
+    //move back from third tower
+    drive::forward(-30, 25.0, 0.6, 0.2, 17, 200);
+
+    /*while(1){
       printf("%f\n", drive::sonic.distance(vex::inches));
-    }
+    }*/
     return 1;
   }
 
