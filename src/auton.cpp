@@ -73,38 +73,42 @@ namespace auton {
     drive::reset();
     intake::spin(100);
     drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
-    wait(1, sec);
-    drive::forwardEasy(15, 25.0);
-    drive::forwardEasy(15, 25.0);
-    drive::forwardEasy(15, 25.0);
-    drive::forwardEasy(10, 25.0);
+    wait(1, sec); 
+    //drive::turn(-10, 65.0, 0.6, 0.2, 17, 200);
+    drive::forwardEasy(15, 20.0);
+    drive::forwardEasy(15, 20.0);
+    drive::forwardEasy(15, 20.0);
+    drive::forwardEasy(10, 20.0);
 
     drive::reset();
     wait(2, vex::seconds);
     intake::reset();
 
+    
     //turn towards goal zone
-    drive::turnEasy(43,25);
+    drive::turnEasy(-43,25);
     drive::forward(19, 35.0, 0.6, 0.2, 17, 200);
 
     //stacking
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(797, 25, .6, 15, 500);
-    wait(2, vex::seconds);
+    tilter::move(850, 15, .6, 15, 500);
+    wait(2, vex::seconds); 
     
     //drive away from goal zone 
     drive::forward(-14, 30.0, 0.6, 0.2, 17, 200);
 
+    /*
     //turn to align with wall, hit wall
     drive::turn(-135, 65.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
     
     //drive forward
-    drive::forward(29, 35.0, 0.6, 0.2, 17, 200);
+    drive::forward(30, 35.0, 0.6, 0.2, 17, 200);
 
     //turn towards tower 
-    drive::turn(-90, 25.0, 0.6, 0.2, 10, 200);
+    drive::turn(-90, 25.0, 0.6, 0.2, 2, 300);
+    drive::untilHitWall(-50);
 
     //move tilter back
     tilter::m.spin(fwd, -100, pct);
@@ -114,8 +118,9 @@ namespace auton {
     intake::spin(100);
 
     //drive towards the tower 
-    drive::forward(35, 35.0, 0.6, 0.2, 17, 200);
-    drive::forward(8, 15.0, 0.6, 0.2, 17, 200);
+    //drive::forward(46, 35.0, 0.6, 0.2, 17, 200);
+    //drive::forward(10, 15.0, 0.6, 0.2, 17, 200);
+    drive::forward(56, 30.0, 0.6, 0.2, 17, 200);
     wait(2, sec);
     drive::forward(-4, 15.0, 0.6, 0.2, 17, 200);
 
@@ -130,6 +135,7 @@ namespace auton {
     tower();
 
     //drive back until it hits the wall
+    
     drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
 
@@ -148,7 +154,7 @@ namespace auton {
 
     //drive toward second tower
     intake::spin(100);
-    drive::forward(58, 25.0, 0.6, 0.2, 17, 200);
+    drive::forward(58, 35.0, 0.6, 0.2, 17, 200);
 
     //back up from the second tower
     drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
@@ -181,7 +187,7 @@ namespace auton {
     //move back from third tower
     drive::forward(-30, 25.0, 0.6, 0.2, 17, 200);
 
-    /*while(1){
+    while(1){
       printf("%f\n", drive::sonic.distance(vex::inches));
     }*/
     return 1;
@@ -282,7 +288,7 @@ namespace auton {
   arm::move(650,100,0.8,5,100);
   intake::reset();
 
-  drive::forwardEasy(-10, 50.0);
+  drive::forwardEasy(-10, 30.0);
   arm::m.spin(fwd, -100, pct);
   wait(100, msec);
   return 0; 
