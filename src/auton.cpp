@@ -64,11 +64,11 @@ namespace auton {
   }
 
   int skills() {
-    drive::spin(-30);
-    //auton::deployTray();
+    timer t;
+    /*drive::spin(-30);
+    auton::deployTray();
 
     //intake 10 cubes
-    drive::spin(-30);
     wait(750,msec);
     drive::reset();
     intake::spin(100);
@@ -93,25 +93,27 @@ namespace auton {
     intake::l.stop(coast);
     intake::r.stop(coast);
     tilter::move(850, 15, .6, 15, 500);
-    wait(2, vex::seconds); 
+    wait(2, vex::seconds); */
     
     //drive away from goal zone 
     drive::forward(-14, 30.0, 0.6, 0.2, 17, 200);
 
-    /*
+    
+    
     //turn to align with wall, hit wall
-    drive::turn(-135, 65.0, 0.6, 0.2, 17, 200);
+    drive::turn(130, 65.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
     
     //drive forward
-    drive::forward(30, 35.0, 0.6, 0.2, 17, 200);
+    drive::forward(28, 70.0, 0.6, 0.2, 17, 200); //changed max to 100
 
     //turn towards tower 
-    drive::turn(-90, 25.0, 0.6, 0.2, 2, 300);
+    drive::turn(90, 25.0, 0.6, 0.2, 5, 300);
+    tilter::m.spin(fwd, -100, pct);
     drive::untilHitWall(-50);
 
     //move tilter back
-    tilter::m.spin(fwd, -100, pct);
+    
     while(tilter::m.torque() < 1.9) {}
     tilter::reset();
 
@@ -120,7 +122,9 @@ namespace auton {
     //drive towards the tower 
     //drive::forward(46, 35.0, 0.6, 0.2, 17, 200);
     //drive::forward(10, 15.0, 0.6, 0.2, 17, 200);
-    drive::forward(56, 30.0, 0.6, 0.2, 17, 200);
+    //drive::forward(56, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(44, 60.0, 0.6, 0.2, 17, 200);
+    drive::forward(12, 30.0, 0.6, 0.2, 17, 200);
     wait(2, sec);
     drive::forward(-4, 15.0, 0.6, 0.2, 17, 200);
 
@@ -132,16 +136,19 @@ namespace auton {
     intake::spin(-50);
     wait(700, msec);
     intake::reset();
+    printf("%f\n",t.time(msec));
     tower();
 
     //drive back until it hits the wall
     
     drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
+
+    /*
     drive::untilHitWall(-50);
 
     //drive forward and turn toward second tower
     drive::forward(23, 50.0, 0.6, 0.2, 17, 200);
-    drive::turn(95, 50.0, 0.6, 0.2, 10, 200);
+    drive::turn(-95, 50.0, 0.6, 0.2, 10, 200);
 
     //move backward to align with the wall
     drive::forward(-24, 50.0, 0.6, 0.2, 17, 200);
@@ -160,14 +167,14 @@ namespace auton {
     drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
 
     //turn left and back up to align with the base wall
-    drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
+    drive::turn(90, 50.0, 0.6, 0.2, 10, 200);
     drive::untilHitWall(-50);
 
     //move forward until parallel with third tower
     drive::forward(34, 25.0, 0.6, 0.2, 17, 200);
 
     //turn toward third tower
-    drive::turn(-90, 50.0, 0.6, 0.2, 10, 200);
+    drive::turn(90, 50.0, 0.6, 0.2, 10, 200);
 
     //hit tower
     drive::forward(28, 25.0, 0.6, 0.2, 17, 200);

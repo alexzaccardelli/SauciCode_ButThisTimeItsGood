@@ -282,7 +282,7 @@ void untilHitWall(double speed) {
         drive::r2.torque(vex::torqueUnits::InLb) > threshold)
       hit = true;
   }
-  wait(500,msec);
+  wait(250,msec);
   reset();
 }
 } // namespace drive

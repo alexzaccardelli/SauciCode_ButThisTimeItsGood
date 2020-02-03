@@ -43,6 +43,7 @@ void usercontrol(void) {
   
   //auton::small(auton::red);
   auton::skills();
+  printf("%f\n",clown.time(msec));
   /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
