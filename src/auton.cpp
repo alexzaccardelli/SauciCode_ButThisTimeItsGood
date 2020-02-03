@@ -65,21 +65,26 @@ namespace auton {
 
   int skills() {
     timer t;
-    /*drive::spin(-30);
+    intake::spin(100);
+    drive::spin(-30);
     auton::deployTray();
 
     //intake 10 cubes
-    wait(750,msec);
+    wait(1000,msec);
     drive::reset();
     intake::spin(100);
     drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec); 
+    //drive::reset();
+    
     //drive::turn(-10, 65.0, 0.6, 0.2, 17, 200);
     drive::forwardEasy(15, 20.0);
-    drive::forwardEasy(15, 20.0);
-    drive::forwardEasy(15, 20.0);
-    drive::forwardEasy(10, 20.0);
+    drive::forwardEasy(8, 20.0);
+    drive::forwardEasy(8, 20.0);
+    drive::forwardEasy(8, 20.0);
+    drive::forwardEasy(16, 20.0);
 
+    
     drive::reset();
     wait(2, vex::seconds);
     intake::reset();
@@ -87,25 +92,29 @@ namespace auton {
     
     //turn towards goal zone
     drive::turnEasy(-43,25);
-    drive::forward(19, 35.0, 0.6, 0.2, 17, 200);
+    //drive::forward(18, 35.0, 0.6, 0.2, 17, 200);
+    drive::spin(35);
+    wait(900, msec);
+    drive::reset();
 
+    
     //stacking
     intake::l.stop(coast);
     intake::r.stop(coast);
     tilter::move(850, 15, .6, 15, 500);
-    wait(2, vex::seconds); */
+    wait(2, vex::seconds); 
     
     //drive away from goal zone 
-    drive::forward(-14, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(-16, 30.0, 0.6, 0.2, 17, 200);
 
     
     
     //turn to align with wall, hit wall
-    drive::turn(130, 65.0, 0.6, 0.2, 17, 200);
+    drive::turn(125, 65.0, 0.6, 0.2, 17, 200);
     drive::untilHitWall(-50);
     
     //drive forward
-    drive::forward(28, 70.0, 0.6, 0.2, 17, 200); //changed max to 100
+    drive::forward(26, 70.0, 0.6, 0.2, 17, 200); //changed max to 100
 
     //turn towards tower 
     drive::turn(90, 25.0, 0.6, 0.2, 5, 300);
@@ -138,10 +147,12 @@ namespace auton {
     intake::reset();
     printf("%f\n",t.time(msec));
     tower();
+    printf("%f\n",t.time(msec));
 
     //drive back until it hits the wall
     
-    drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
+    //drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
+   
 
     /*
     drive::untilHitWall(-50);
