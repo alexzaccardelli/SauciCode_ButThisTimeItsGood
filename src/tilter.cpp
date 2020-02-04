@@ -3,10 +3,8 @@ using namespace vex;
 
 namespace tilter {
   motor m = motor(PORT16, ratio36_1, false);
-  bool complete = false;
 
   void reset() {
-    //m = motor(PORT2, ratio36_1, false);
     m.stop(vex::hold);
     m.resetRotation();
   }
@@ -20,7 +18,6 @@ namespace tilter {
   }
 
   int op() {
-    limit b = limit(cpu.ThreeWirePort.A);
     double upVel = 40, downVel = -100, k = .5;
     while(1) {
       if(con.ButtonR1.pressing()) {

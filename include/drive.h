@@ -5,8 +5,6 @@ using namespace vex;
 namespace drive {
   extern motor l1, l2, r1, r2;
   extern encoder enc;
-  extern sonar sonic;
-
 
   void reset();
   void stop();
