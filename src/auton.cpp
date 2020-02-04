@@ -64,10 +64,10 @@ namespace auton {
   }
 
   int skills() {
-    timer t;
+    timer clown;
     intake::spin(100);
     drive::spin(-30);
-    auton::deployTray();
+    //auton::deployTray();
 
     //intake 10 cubes
     wait(1000,msec);
@@ -75,29 +75,34 @@ namespace auton {
     intake::spin(100);
     drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
     wait(1, sec); 
-    //drive::reset();
     
-    //drive::turn(-10, 65.0, 0.6, 0.2, 17, 200);
+    
     drive::forwardEasy(15, 20.0);
     drive::forwardEasy(8, 20.0);
+     wait(200, msec); //new
     drive::forwardEasy(8, 20.0);
+    wait(200,msec); //new
     drive::forwardEasy(8, 20.0);
+    intake::spin(10); //new
+    wait(200, msec); //new
     drive::forwardEasy(16, 20.0);
-
     
     drive::reset();
-    wait(2, vex::seconds);
-    intake::reset();
+    wait(2, vex::seconds); 
+    intake::reset(); 
 
-    
+  /*
     //turn towards goal zone
     drive::turnEasy(-43,25);
     //drive::forward(18, 35.0, 0.6, 0.2, 17, 200);
     drive::spin(35);
     wait(900, msec);
     drive::reset();
+    wait(100,msec);
+    */
 
-    
+    /*
+
     //stacking
     intake::l.stop(coast);
     intake::r.stop(coast);
@@ -106,8 +111,6 @@ namespace auton {
     
     //drive away from goal zone 
     drive::forward(-16, 30.0, 0.6, 0.2, 17, 200);
-
-    
     
     //turn to align with wall, hit wall
     drive::turn(125, 65.0, 0.6, 0.2, 17, 200);
@@ -129,9 +132,6 @@ namespace auton {
     intake::spin(100);
 
     //drive towards the tower 
-    //drive::forward(46, 35.0, 0.6, 0.2, 17, 200);
-    //drive::forward(10, 15.0, 0.6, 0.2, 17, 200);
-    //drive::forward(56, 30.0, 0.6, 0.2, 17, 200);
     drive::forward(44, 60.0, 0.6, 0.2, 17, 200);
     drive::forward(12, 30.0, 0.6, 0.2, 17, 200);
     wait(2, sec);
@@ -145,16 +145,15 @@ namespace auton {
     intake::spin(-50);
     wait(700, msec);
     intake::reset();
-    printf("%f\n",t.time(msec));
     tower();
-    printf("%f\n",t.time(msec));
+    printf("%f\n",clown.time(msec)); */
 
     //drive back until it hits the wall
     
-    //drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
+    /*drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
    
 
-    /*
+    
     drive::untilHitWall(-50);
 
     //drive forward and turn toward second tower
