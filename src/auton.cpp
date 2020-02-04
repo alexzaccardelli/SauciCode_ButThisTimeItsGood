@@ -243,6 +243,28 @@ namespace auton {
     return 1;    
   }
 
+  int big(int side) {
+    auton::deployTray();
+    intake::spin(100);
+    drive::forwardEasy(21, 35.0);
+    if(side == 1) { drive::turnEasy(95, 75.0); }
+    else {drive::turnEasy(-90, 75.0);}
+    drive::forwardEasy(23,35.0);
+    intake::reset();
+    if(side == 1) { drive::turnEasy(45, 75.0); }
+    else {drive::turnEasy(-30, 75.0);}
+    drive::forwardEasy(8, 10.0);
+    drive::reset();
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    tilter::move(600, 90, .8, 15, 100);
+    tilter::move(850, 40, .8, 15, 100);
+    drive::spin(-20);
+    wait(800, msec);
+    drive::reset();
+    return 1;
+  }
+
   int redSmall() {
     auton::deployTray();
     wait(800, msec);
