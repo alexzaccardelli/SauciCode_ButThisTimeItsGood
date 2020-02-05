@@ -13,7 +13,6 @@ namespace auton {
   int deployTray();
   int op();
   int skills();
-  int big(int side); //blue = 1, red = -1
   int redSmall();
   int blueSmall();
   void onePoint();

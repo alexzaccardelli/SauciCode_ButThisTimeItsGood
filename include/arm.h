@@ -6,7 +6,7 @@ namespace arm {
   extern vex::motor m;
 
   void reset();
-  void stop(vex::brakeType brake = vex::brakeType::coast);
+  void stop(vex::brakeType brake = vex::brakeType::hold);
 
   int move(double height, double max, double kP, double range, double time);
 
