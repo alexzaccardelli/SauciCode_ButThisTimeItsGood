@@ -18,10 +18,18 @@ int printInfo() {
   }
 }
 void usercontrol(void) {
-  timer clown;
+  /*timer clown;
   auton::big(1);
-  printf("%f\n", clown.time(msec));
-  /*driveTask = task(drive::op);
+  printf("%f\n", clown.time(msec));*/
+
+  
+  //----driver skills----
+  intake::spin(100);
+  drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
+  wait(1, sec); 
+  drive::forwardEasy(15, 20.0);
+  drive::forwardEasy(8, 20.0);
+  driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
@@ -31,7 +39,7 @@ void usercontrol(void) {
     printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
     //printf("%f\n", drive::enc.rotation(deg));
     
-  }*/
+  }
 }
 
 void pre_auton(void) {
