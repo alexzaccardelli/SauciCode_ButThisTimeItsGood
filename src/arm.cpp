@@ -28,16 +28,33 @@ namespace arm {
 
   int op() {
     double upVel = 100, downVel = -100;
+    limit l = limit(cpu.ThreeWirePort.E);
     while(1) {
       if(con.ButtonX.pressing()) {
         spin(upVel);
-        while(con.ButtonX.pressing()) wait(5,msec);
+        while(con.ButtonX.pressing()) {
+          if(l.pressing()) m.resetRotation();
+          wait(5,msec);
+        }
       }
       if(con.ButtonB.pressing()) {
         spin(downVel);
-        while(con.ButtonB.pressing()) wait(5,msec);
+        while(con.ButtonB.pressing()) {
+          if(l.pressing()) m.resetRotation();
+          wait(5,msec);
+        }
+      }
+      if(con.ButtonUp.pressing()) {
+        intakeTask.suspend();
+        intake::spin(-50);
+        wait(700, msec);
+        intake::reset();
+        move(520, 50, .8, 5, 100);
+        
+        intakeTask.resume();
       }
       stop();
+      if(l.pressing()) m.resetRotation();
       wait(5, msec);
     }
     return 1;
