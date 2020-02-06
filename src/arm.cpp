@@ -5,13 +5,25 @@ namespace arm {
   motor m = motor(PORT13, ratio36_1, false);
 
   void reset() {
-    m.stop(coast);m.resetRotation();
+
+    //m = motor(PORT14, ratio36_1, false);
+    m.stop(coast);
+
+    //m = motor(PORT1, ratio36_1, false);
+    //m.stop(hold);
+
+    m.resetRotation();
   }
   void stop(vex::brakeType brake) {
     m.stop(brake);
   }
   void spin(double vel) {
     m.spin(fwd, vel, pct);
+  }
+
+  int blah() {
+    tilter::move(150, 100, .8, 5, 100);
+    return 1;
   }
 
   int op() {
@@ -38,6 +50,7 @@ namespace arm {
         wait(700, msec);
         intake::reset();
         move(520, 50, .8, 5, 100);
+        
         intakeTask.resume();
       }
       stop();

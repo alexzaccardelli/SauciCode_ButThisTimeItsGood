@@ -6,6 +6,7 @@ namespace tilter {
   bool complete = false;
 
   void reset() {
+    //m = motor(PORT2, ratio36_1, false);
     m.stop(vex::hold);
     m.resetRotation();
   }
