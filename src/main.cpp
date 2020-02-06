@@ -19,6 +19,7 @@ int printInfo() {
 }
 void usercontrol(void) {
   //----driver skills----
+  timer clown;
   intake::spin(100);
   drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
   wait(1, sec); 
@@ -30,9 +31,18 @@ void usercontrol(void) {
   armTask = task(arm::op);
   while (1) {
     wait(5, msec);
+    if (clown.time(msec) > 57000) { break; }
     //printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
     //printf("%f\n", drive::enc.rotation(deg));    
   }
+  driveTask.stop();
+  intakeTask.stop();
+  tilterTask.stop();
+  armTask.stop();
+  drive::reset();
+  intake::reset();
+  tilter::reset();
+  arm::reset();
   /*
   timer clown;
   auton::skills();
