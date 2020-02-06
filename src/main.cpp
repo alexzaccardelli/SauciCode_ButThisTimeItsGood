@@ -18,6 +18,7 @@ int printInfo() {
   }
 }
 void usercontrol(void) {
+  /*
   //----driver skills----
   intake::spin(100);
   drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
@@ -33,6 +34,11 @@ void usercontrol(void) {
     //printf("%f  %f  %f  %f\n", arm::m.rotation(deg), arm::m.torque(), tilter::m.rotation(deg), tilter::m.torque());
     //printf("%f\n", drive::enc.rotation(deg));    
   }
+  */
+  timer clown;
+  auton::skills();
+  printf("%f\n", clown.time(msec));
+
 }
 
 void pre_auton(void) {

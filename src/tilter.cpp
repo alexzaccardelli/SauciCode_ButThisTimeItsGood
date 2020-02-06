@@ -56,7 +56,7 @@ namespace tilter {
       lastErr = err;
       err = ticks - m.rotation(vex::deg);
       if(err > ticks/2)
-      vel = 100;
+      vel = 60;
       else if(err * kP > max) vel = max;
       else if(err * kP < -max) vel = -max;
       else vel = err * kP;

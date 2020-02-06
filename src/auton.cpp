@@ -72,7 +72,7 @@ namespace auton {
     timer t;
     intake::spin(100);
     drive::spin(-30);
-    auton::deployTray();
+    //auton::deployTray();
 
     //intake 10 cubes
     wait(1000,msec);
@@ -84,9 +84,13 @@ namespace auton {
     
     //drive::turn(-10, 65.0, 0.6, 0.2, 17, 200);
     drive::forwardEasy(15, 20.0);
+    //wait(200, msec);
     drive::forwardEasy(8, 20.0);
+    wait(200, msec);
     drive::forwardEasy(8, 20.0);
+    wait(200, msec);
     drive::forwardEasy(8, 20.0);
+    wait(200, msec);
     drive::forwardEasy(16, 20.0);
 
     
@@ -97,22 +101,22 @@ namespace auton {
     
     //turn towards goal zone
     drive::turnEasy(-43,25);
+    wait(1, sec);
     //drive::forward(18, 35.0, 0.6, 0.2, 17, 200);
     drive::spin(35);
     wait(900, msec);
     drive::reset();
 
-    
+    wait(2, sec);
+
     //stacking
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(850, 15, .6, 15, 500);
+    tilter::move(860, 15, .5, 15, 500);
     wait(2, vex::seconds); 
     
     //drive away from goal zone 
     drive::forward(-16, 30.0, 0.6, 0.2, 17, 200);
-
-    
     
     //turn to align with wall, hit wall
     drive::turn(125, 65.0, 0.6, 0.2, 17, 200);
@@ -140,7 +144,7 @@ namespace auton {
     drive::forward(44, 60.0, 0.6, 0.2, 17, 200);
     drive::forward(12, 30.0, 0.6, 0.2, 17, 200);
     wait(2, sec);
-    drive::forward(-4, 15.0, 0.6, 0.2, 17, 200);
+    drive::forward(-5, 15.0, 0.6, 0.2, 17, 200);
 
     //intake cube and place in first tower 
     intake::spin(100);
@@ -158,6 +162,7 @@ namespace auton {
     
     //drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
    
+  
 
     /*
     drive::untilHitWall(-50);
