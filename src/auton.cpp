@@ -26,20 +26,19 @@ namespace auton {
   }
   
   void small(int side) {
-    timer t;
+    timer t; //Timer to end routine at 15 seconds
     t.reset();
-  
     deployTray();
     intake::spin(100);
-    drive::forwardEasy(43.5, 30.0);
+    drive::forwardEasy(43.5, 30.0); //Intake 4 cubes + preload
     intake::reset();
-    drive::forwardEasy(-28, 80.0);
-    if(side == red) drive::turnEasy(132, 75.0);
+    drive::forwardEasy(-28, 80.0); //Move back to line up at 45 degrees from goal zone
+    if(side == red) drive::turnEasy(132, 75.0); //Turn towards goal zone
     else drive::turnEasy(-123, 75.0);
-    drive::forwardEasy(13.5, 40.0);
-    tilter::move(600, 100, .8, 15, 100);
+    drive::forwardEasy(13.5, 40.0); //Move to goal zone
+    tilter::move(600, 100, .8, 15, 100); //Stack 5 cubes
     tilter::move(850, 40, .8, 15, 100);
-    drive::spin(-20);
+    drive::spin(-20); //Move back to clear stack before timer reaches 15 seconds
     cpu.Screen.clearScreen();
     cpu.Screen.setCursor(5,5);
     cpu.Screen.print("%f", t.time(msec));

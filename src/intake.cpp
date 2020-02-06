@@ -6,8 +6,6 @@ namespace intake {
   motor r = motor(PORT11, ratio36_1, true);
 
   void reset() {
-    //l = motor(PORT3, ratio18_1, false);
-    //r = motor(PORT4, ratio18_1, true);
     l.stop(hold);
     r.stop(hold);
     l.resetRotation();
@@ -37,9 +35,7 @@ namespace intake {
           last = 1;
           spin(100);
         }
-        while(con.ButtonL1.pressing()) {
-          wait(5, msec);
-        }
+        while(con.ButtonL1.pressing()) wait(5, msec);
         wait(delay, msec);
       }
       if(con.ButtonL2.pressing()) {
@@ -51,9 +47,7 @@ namespace intake {
           last = 2;
           spin(-100);
         }
-        while(con.ButtonL2.pressing()) {
-          wait(5, msec);
-        }
+        while(con.ButtonL2.pressing()) wait(5, msec);
         wait(delay, msec);
       }
       wait(5, msec);
