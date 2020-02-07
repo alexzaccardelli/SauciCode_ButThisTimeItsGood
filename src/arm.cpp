@@ -5,13 +5,7 @@ namespace arm {
   motor m = motor(PORT13, ratio36_1, false);
 
   void reset() {
-
-    //m = motor(PORT14, ratio36_1, false);
     m.stop(coast);
-
-    //m = motor(PORT1, ratio36_1, false);
-    //m.stop(hold);
-
     m.resetRotation();
   }
   void stop(vex::brakeType brake) {
@@ -21,13 +15,9 @@ namespace arm {
     m.spin(fwd, vel, pct);
   }
 
-  int blah() {
-    tilter::move(150, 100, .8, 5, 100);
-    return 1;
-  }
-
   int op() {
     double upVel = 100, downVel = -100;
+    int pressCount = 0;
     limit l = limit(cpu.ThreeWirePort.E);
     while(1) {
       if(con.ButtonX.pressing()) {
@@ -45,13 +35,35 @@ namespace arm {
         }
       }
       if(con.ButtonUp.pressing()) {
-        intakeTask.suspend();
-        intake::spin(-50);
-        wait(700, msec);
-        intake::reset();
-        move(520, 50, .8, 5, 100);
-        
-        intakeTask.resume();
+        if(pressCount == 0) {
+          pressCount = 1;
+          intakeTask.suspend();
+          intake::spin(-50);
+          wait(700, msec);
+          intake::reset();
+          move(520, 50, .8, 5, 100);
+          intakeTask.resume();
+          while(con.ButtonUp.pressing()) wait(5, msec);
+        }
+        else {
+          driveTask.suspend();
+          intakeTask.suspend();
+          pressCount = 0;
+          arm::spin(-100);
+          while(arm::m.torque() < 2.05) {}
+          arm::stop();
+          intake::spin(-50);
+          drive::spin(-80);
+          wait(500, msec);
+          drive::reset();
+          intake::reset();
+          driveTask.resume();
+          intakeTask.resume();
+          arm::spin(-100);
+          while(arm::m.torque() < 2.05) {}
+          arm::reset();
+          while(con.ButtonUp.pressing()) wait(5, msec);
+        }
       }
       stop();
       if(l.pressing()) m.resetRotation();

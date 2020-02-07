@@ -28,15 +28,16 @@ namespace auton {
   void small(int side) {
     timer t;
     t.reset();
-  
     deployTray();
     intake::spin(100);
-    drive::forwardEasy(43.5, 30.0);
+    drive::forwardEasy(43.5, 30.0, 0.25);
     intake::reset();
-    drive::forwardEasy(-28, 80.0);
-    if(side == red) drive::turnEasy(132, 75.0);
+    drive::forwardEasy(-27, 80.0, 0.25);
+    if(side == red) drive::turnEasy(136, 75.0);
     else drive::turnEasy(-123, 75.0);
-    drive::forwardEasy(13.5, 40.0);
+    drive::forwardEasy(13.5, 80.0, 0.25);
+    intake::l.stop(coast);
+    intake::r.stop(coast);
     tilter::move(600, 100, .8, 15, 100);
     tilter::move(850, 40, .8, 15, 100);
     drive::spin(-20);
@@ -157,67 +158,6 @@ namespace auton {
     printf("%f\n",t.time(msec));
     tower();
     printf("%f\n",t.time(msec));
-
-    //drive back until it hits the wall
-    
-    //drive::forward(-30, 50.0, 0.6, 0.2, 17, 200);
-   
-  
-
-    /*
-    drive::untilHitWall(-50);
-
-    //drive forward and turn toward second tower
-    drive::forward(23, 50.0, 0.6, 0.2, 17, 200);
-    drive::turn(-95, 50.0, 0.6, 0.2, 10, 200);
-
-    //move backward to align with the wall
-    drive::forward(-24, 50.0, 0.6, 0.2, 17, 200);
-    drive::untilHitWall(-50);
-
-    //move tray back
-    tilter::m.spin(fwd, -100, pct);
-    while(tilter::m.torque() < 1.9) {}
-    tilter::reset();
-
-    //drive toward second tower
-    intake::spin(100);
-    drive::forward(58, 35.0, 0.6, 0.2, 17, 200);
-
-    //back up from the second tower
-    drive::forward(-20, 25.0, 0.6, 0.2, 17, 200);
-
-    //turn left and back up to align with the base wall
-    drive::turn(90, 50.0, 0.6, 0.2, 10, 200);
-    drive::untilHitWall(-50);
-
-    //move forward until parallel with third tower
-    drive::forward(34, 25.0, 0.6, 0.2, 17, 200);
-
-    //turn toward third tower
-    drive::turn(90, 50.0, 0.6, 0.2, 10, 200);
-
-    //hit tower
-    drive::forward(28, 25.0, 0.6, 0.2, 17, 200);
-    drive::untilHitWall(50);
-
-    //move back to put cube in third tower
-    drive::forward(-12, 25.0, 0.6, 0.2, 17, 200);
-    intake::spin(100);
-    wait(500, msec);
-    intake::reset();
-    wait(500,msec);
-    intake::spin(-50);
-    wait(700, msec);
-    intake::reset();
-    tower();
-
-    //move back from third tower
-    drive::forward(-30, 25.0, 0.6, 0.2, 17, 200);
-
-    while(1){
-      printf("%f\n", drive::sonic.distance(vex::inches));
-    }*/
     return 1;
   }
 

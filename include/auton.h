@@ -9,14 +9,13 @@ namespace auton {
   };
 
   void resetAll();
+  int deployTray();
+
+  void onePoint();
   void small(int side);
   void big(int side);
-  int deployTray();
-  int op();
+
   int skills();
-  int redSmall();
-  int blueSmall();
-  void onePoint();
   int tower();
 }
 
