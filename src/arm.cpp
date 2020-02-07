@@ -23,14 +23,20 @@ namespace arm {
       if(con.ButtonX.pressing()) {
         spin(upVel);
         while(con.ButtonX.pressing()) {
-          if(l.pressing()) m.resetRotation();
+          if(l.pressing()) {
+            pressCount = 0;
+            m.resetRotation();
+          }
           wait(5,msec);
         }
       }
       if(con.ButtonB.pressing()) {
         spin(downVel);
         while(con.ButtonB.pressing()) {
-          if(l.pressing()) m.resetRotation();
+          if(l.pressing()) {
+            pressCount  = 0;
+            m.resetRotation();
+          }
           wait(5,msec);
         }
       }
@@ -66,7 +72,10 @@ namespace arm {
         }
       }
       stop();
-      if(l.pressing()) m.resetRotation();
+      if(l.pressing()) {
+        pressCount = 0;
+        m.resetRotation();
+      }
       wait(5, msec);
     }
     return 1;

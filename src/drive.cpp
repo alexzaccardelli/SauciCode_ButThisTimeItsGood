@@ -170,7 +170,7 @@ int turn(double deg, double max, double accel, double kP, double range,
 }
 
 int turnEasy(double deg, double max) {
-  double kP=0.25, range=5, time=100;
+  double kP=0.25, range=4, time=250;
   reset();
   double ticks = deg * (250.0 / 90.0);
   double lErr=0, rErr=0, lVel=0, rVel=0;

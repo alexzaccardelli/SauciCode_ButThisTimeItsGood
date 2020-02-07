@@ -32,11 +32,11 @@ namespace auton {
     intake::spin(100);
     drive::forwardEasy(43.5, 30.0, 0.25);
     intake::reset();
-    drive::forwardEasy(-26, 80.0, 0.25);
-    if(side == red) drive::turnEasy(131, 75.0);
-    else drive::turnEasy(-123, 75.0);
-    drive::spin(80);
-    wait(800, msec);
+    drive::forwardEasy(-25, 80.0, 0.25);
+    if(side == red) drive::turnEasy(131, 60.0);
+    else drive::turnEasy(-123, 60.0);
+    drive::spin(60);
+    wait(600, msec);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
@@ -60,7 +60,7 @@ namespace auton {
     intake::reset();
     if(side == blue) { drive::turnEasy(45, 75.0); }
     else {drive::turnEasy(-30, 75.0);}
-    drive::forwardEasy(8, 20.0);
+    drive::forwardEasy(8, 60.0);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
@@ -75,7 +75,7 @@ namespace auton {
     timer t;
     intake::spin(100);
     drive::spin(-30);
-    //auton::deployTray();
+    auton::deployTray();
 
     //intake 10 cubes
     wait(1000,msec);
@@ -176,8 +176,6 @@ namespace auton {
   }
 
   int tower(){
-    intake::l.setBrake(hold);
-    intake::r.setBrake(hold);
     wait(500, msec);
     arm::move(520,100,0.8,5,100);
     drive::spin(15);

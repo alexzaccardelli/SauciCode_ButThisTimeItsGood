@@ -8,6 +8,7 @@ task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void driverSkills() {
   timer clown;
+  auton::deployTray();
   intake::spin(100);
   drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
   wait(1, sec); 
@@ -20,7 +21,7 @@ void driverSkills() {
   armTask = task(arm::op);
   while (1) {
     wait(5, msec);
-    if (clown.time(msec) > 57000) { break; }
+    if (clown.time(msec) > 60000) { break; }
   }
   driveTask.stop();
   intakeTask.stop();
@@ -30,6 +31,7 @@ void driverSkills() {
 }
 
 void driverMatch() {
+  tilter::spin(-100);
   while(tilter::m.torque() < 1.9) {}
   tilter::reset();
   arm::move(150, 100, .8, 5, 100);
@@ -49,8 +51,8 @@ void driverMatch() {
 
 void usercontrol(void) {
   //driverMatch();
-  //driverSkills();
-  auton::big(auton::red);
+  driverSkills();
+  //auton::small(auton::blue);
   /*
   driveTask = task(drive::op);
   intakeTask = task(intake::op);
