@@ -32,10 +32,12 @@ namespace auton {
     intake::spin(100);
     drive::forwardEasy(43.5, 30.0, 0.25);
     intake::reset();
-    drive::forwardEasy(-27, 80.0, 0.25);
-    if(side == red) drive::turnEasy(136, 75.0);
+    drive::forwardEasy(-26, 80.0, 0.25);
+    if(side == red) drive::turnEasy(131, 75.0);
     else drive::turnEasy(-123, 75.0);
-    drive::forwardEasy(13.5, 80.0, 0.25);
+    drive::spin(80);
+    wait(800, msec);
+    drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
     tilter::move(600, 100, .8, 15, 100);
@@ -52,13 +54,13 @@ namespace auton {
     auton::deployTray();
     intake::spin(100);
     drive::forwardEasy(21, 35.0);
-    if(side == 1) { drive::turnEasy(95, 75.0); }
+    if(side == blue) { drive::turnEasy(93, 75.0); }
     else {drive::turnEasy(-90, 75.0);}
     drive::forwardEasy(23,35.0);
     intake::reset();
-    if(side == 1) { drive::turnEasy(45, 75.0); }
+    if(side == blue) { drive::turnEasy(45, 75.0); }
     else {drive::turnEasy(-30, 75.0);}
-    drive::forwardEasy(8, 10.0);
+    drive::forwardEasy(8, 20.0);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);

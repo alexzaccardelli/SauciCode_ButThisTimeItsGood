@@ -49,7 +49,17 @@ void driverMatch() {
 
 void usercontrol(void) {
   //driverMatch();
-  driverSkills();
+  //driverSkills();
+  auton::big(auton::red);
+  /*
+  driveTask = task(drive::op);
+  intakeTask = task(intake::op);
+  tilterTask = task(tilter::op);
+  armTask = task(arm::op);
+  while (1) {
+    wait(5, msec);
+  }
+  */
 }
 
 void pre_auton(void) {
@@ -60,7 +70,8 @@ void pre_auton(void) {
 void autonomous(void) {
   auton::resetAll();
   //auton::onePoint();
-  //auton::small(auton::);
+  wait(200, msec);
+  
   //auton::skills();
   auton::resetAll();
 }
