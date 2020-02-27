@@ -41,20 +41,25 @@ void driverMatch() {
   arm::reset();
   auton::resetAll();*/
 
-  /*driveTask = task(drive::op);
+  driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
+  
   while (1) {
+    printf("%f  %f\n", tilter::m.rotation(deg), arm::m.rotation(deg));
     wait(5, msec);
-  }*/
+  }
 }
 
 void usercontrol(void) {
   timer clown;
   auton::small(auton::blue);
   printf("%f\n", clown.time(msec));
-  //driverMatch();
+  /*timer t3;
+  auton::deployTray();
+  printf("%f\n", t3.time(msec));*/
+  
   //driverSkills();
   //auton::small(auton::blue);
   /*

@@ -11,14 +11,7 @@ namespace auton {
   }
 
   int deployTray() {
-    intake::spin(-100);
-    tilter::move(300, 100, .8, 15, 100);
-    intake::l.stop(coast);
-    intake::r.stop(coast);
-    tilter::m.spin(fwd, -100, pct);
-    while(tilter::m.torque() < 1.9) {}
-    tilter::reset();
-    arm::move(150, 100, .8, 5, 100);
+    arm::move(400, 100, .8, 5, 100);
     arm::m.spin(fwd, -100, pct);
     while(arm::m.torque() < 2.05) {}
     arm::reset();
@@ -28,9 +21,9 @@ namespace auton {
   void small(int side) {
     timer t;
     t.reset();
-    //deployTray();
+    deployTray();
     intake::spin(100);
-    drive::forward(37, 50.0, 0.25);
+    drive::forward(43.5, 40.0, 0.25);
     intake::reset();
     drive::forward(-25, 50.0, 0.25);
     if(side == red) drive::turn(131, 60.0);

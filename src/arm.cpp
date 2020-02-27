@@ -2,7 +2,7 @@
 using namespace vex;
 
 namespace arm {
-  motor m = motor(PORT11, ratio36_1, false);
+  motor m = motor(PORT11, ratio36_1, true);
 
   void reset() {
     m.stop(coast);
@@ -18,7 +18,7 @@ namespace arm {
   int op() {
     double upVel = 100, downVel = -100;
     int pressCount = 0;
-    limit l = limit(cpu.ThreeWirePort.E);
+    limit l = limit(cpu.ThreeWirePort.C);
     while(1) {
       if(con.ButtonX.pressing()) {
         spin(upVel);

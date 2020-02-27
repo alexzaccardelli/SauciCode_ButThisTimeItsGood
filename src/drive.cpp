@@ -66,7 +66,7 @@ namespace drive {
   }
   int forward(double dist, double max, double kP, double range, double time, double timeout) {
     reset();
-    double ticks = dist / (2.0 * 3.145 * 1.625) * 360.0;
+    double ticks = dist / (2.0 * 3.145 * 1.87) * 360.0;
     double err = 0, vel = 0;
     timer t, t1;
     while (1) {
@@ -93,7 +93,7 @@ namespace drive {
 
   int turn(double deg, double max, double kP, double range, double time, double timeout) {
     reset();
-    double ticks = deg * (250.0 / 90.0);
+    double ticks = deg * 2.49;
     double err = 0, vel = 0;
     timer t, t1;
     while (1) {

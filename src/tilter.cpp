@@ -19,7 +19,7 @@ namespace tilter {
   }
 
   int op() {
-    limit b = limit(cpu.ThreeWirePort.A);
+    limit b = limit(cpu.ThreeWirePort.H);
     double upVel = 40, downVel = -100, k = .5;
     while(1) {
       if(con.ButtonR1.pressing()) {
