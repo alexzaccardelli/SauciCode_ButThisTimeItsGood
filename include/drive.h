@@ -14,10 +14,8 @@ namespace drive {
   void spinLeft(int vel);
   void untilHitWall(double speed);
 
-  int turn(double deg, double max, double accel, double kP, double range, double time);
-  int turnEasy(double deg, double max);
-  int forward(double dist, double max, double accel, double kP, double range, double time);
-  int forwardEasy(double dist, double max, double kP=0.15);
+  int turn(double deg, double max, double kP=0.25, double range=4, double time=250, double timeout=5000);
+  int forward(double dist, double max, double kP=0.15, double range=17, double time=100, double timeout=5000);
 
   int op();
 }

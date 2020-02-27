@@ -30,11 +30,11 @@ namespace auton {
     t.reset();
     //deployTray();
     intake::spin(100);
-    drive::forwardEasy(37, 50.0, 0.25);
+    drive::forward(37, 50.0, 0.25);
     intake::reset();
-    drive::forwardEasy(-25, 50.0, 0.25);
-    if(side == red) drive::turnEasy(131, 60.0);
-    else drive::turnEasy(-123, 60.0);
+    drive::forward(-25, 50.0, 0.25);
+    if(side == red) drive::turn(131, 60.0);
+    else drive::turn(-123, 60.0);
     drive::spin(60);
     wait(600, msec);
     drive::reset();
@@ -54,14 +54,14 @@ namespace auton {
   void big(int side) {
     auton::deployTray();
     intake::spin(100);
-    drive::forwardEasy(21, 35.0);
-    if(side == blue) { drive::turnEasy(93, 75.0); }
-    else {drive::turnEasy(-90, 75.0);}
-    drive::forwardEasy(23,35.0);
+    drive::forward(21, 35.0);
+    if(side == blue) { drive::turn(93, 75.0); }
+    else {drive::turn(-90, 75.0);}
+    drive::forward(23,35.0);
     intake::reset();
-    if(side == blue) { drive::turnEasy(45, 75.0); }
-    else {drive::turnEasy(-30, 75.0);}
-    drive::forwardEasy(8, 60.0);
+    if(side == blue) { drive::turn(45, 75.0); }
+    else {drive::turn(-30, 75.0);}
+    drive::forward(8, 60.0);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
@@ -73,98 +73,8 @@ namespace auton {
   }
 
   int skills() {
-    timer t;
-    intake::spin(100);
-    drive::spin(-30);
-    auton::deployTray();
-
-    //intake 10 cubes
-    wait(1000,msec);
-    drive::reset();
-    intake::spin(100);
-    drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
-    wait(1, sec); 
-    //drive::reset();
-    
-    //drive::turn(-10, 65.0, 0.6, 0.2, 17, 200);
-    drive::forwardEasy(15, 20.0);
-    //wait(200, msec);
-    drive::forwardEasy(8, 20.0);
-    wait(200, msec);
-    drive::forwardEasy(8, 20.0);
-    wait(200, msec);
-    drive::forwardEasy(8, 20.0);
-    wait(200, msec);
-    drive::forwardEasy(16, 20.0);
-
-    
-    drive::reset();
-    wait(2, vex::seconds);
-    intake::reset();
-
-    
-    //turn towards goal zone
-    drive::turnEasy(-43,25);
-    wait(1, sec);
-    //drive::forward(18, 35.0, 0.6, 0.2, 17, 200);
-    drive::spin(35);
-    wait(900, msec);
-    drive::reset();
-
-    wait(2, sec);
-
-    //stacking
-    intake::l.stop(coast);
-    intake::r.stop(coast);
-    tilter::move(860, 15, .5, 15, 500);
-    wait(2, vex::seconds); 
-    
-    //drive away from goal zone 
-    drive::forward(-16, 30.0, 0.6, 0.2, 17, 200);
-    
-    //turn to align with wall, hit wall
-    drive::turn(125, 65.0, 0.6, 0.2, 17, 200);
-    drive::untilHitWall(-50);
-    
-    //drive forward
-    drive::forward(26, 70.0, 0.6, 0.2, 17, 200); //changed max to 100
-
-    //turn towards tower 
-    drive::turn(90, 25.0, 0.6, 0.2, 5, 300);
-    tilter::m.spin(fwd, -100, pct);
-    drive::untilHitWall(-50);
-
-    //move tilter back
-    
-    while(tilter::m.torque() < 1.9) {}
-    tilter::reset();
-
-    intake::spin(100);
-
-    //drive towards the tower 
-    //drive::forward(46, 35.0, 0.6, 0.2, 17, 200);
-    //drive::forward(10, 15.0, 0.6, 0.2, 17, 200);
-    //drive::forward(56, 30.0, 0.6, 0.2, 17, 200);
-    drive::forward(44, 60.0, 0.6, 0.2, 17, 200);
-    drive::forward(12, 30.0, 0.6, 0.2, 17, 200);
-    wait(2, sec);
-    drive::forward(-5, 15.0, 0.6, 0.2, 17, 200);
-
-    //intake cube and place in first tower 
-    intake::spin(100);
-    wait(500, msec);
-    intake::reset();
-    wait(500,msec);
-    intake::spin(-50);
-    wait(700, msec);
-    intake::reset();
-    printf("%f\n",t.time(msec));
-    tower();
-    printf("%f\n",t.time(msec));
     return 1;
   }
-
-  
 
   void onePoint(){
     drive::spin(-50);
@@ -188,7 +98,7 @@ namespace auton {
     arm::move(650,100,0.8,5,100);
     intake::reset();
 
-    drive::forwardEasy(-10, 30.0);
+    drive::forward(-10, 30.0);
     arm::m.spin(fwd, -100, pct);
     wait(100, msec);
     return 0; 

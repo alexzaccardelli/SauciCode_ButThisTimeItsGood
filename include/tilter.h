@@ -10,7 +10,7 @@ namespace tilter {
   void stop(vex::brakeType brake = vex::brakeType::hold);
   void spin(double vel);
 
-  int move(double deg, double max, double kP, double range, double time);
+  int move(double ticks, double max, double kP=.15, double range=10, double time=100, double timeout=5000);
 
   int op();
 }

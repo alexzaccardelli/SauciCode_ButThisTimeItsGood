@@ -8,7 +8,7 @@ namespace arm {
   void reset();
   void stop(vex::brakeType brake = vex::brakeType::hold);
 
-  int move(double height, double max, double kP, double range, double time);
+  int move(double ticks, double max, double kP=.15, double range=10, double time=100, double timeout=5000);
 
   int op();
 }

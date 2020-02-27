@@ -81,10 +81,10 @@ namespace arm {
     return 1;
   }
 
-  int move(double height, double max, double kP, double range, double time) {
+  int move(double ticks, double max, double kP, double range, double time, double timeout) {
     stop();
-    double ticks = height, err, vel;
-    timer t;
+    double err = 0, vel = 0;
+    timer t, t1;
     while(1) {
       err = ticks - m.rotation(vex::deg);
 
@@ -96,6 +96,7 @@ namespace arm {
 
       if(fabs(err) > range) t.reset();
       if(t.time(msec) > time) break;
+      if(t1.time(msec) > timeout) break;
 
       wait(5, msec);
     }
