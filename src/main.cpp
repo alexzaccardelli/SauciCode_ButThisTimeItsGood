@@ -7,7 +7,8 @@ controller con;
 task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void driverSkills() {
-  timer clown;
+  //drive::l1.vex::spin(50);
+  /*timer clown;
   auton::deployTray();
   intake::spin(100);
   drive::forward(70, 30.0, 0.6, 0.2, 17, 200);
@@ -27,31 +28,34 @@ void driverSkills() {
   intakeTask.stop();
   tilterTask.stop();
   armTask.stop();
-  auton::resetAll();
+  auton::resetAll();*/
 }
 
 void driverMatch() {
-  tilter::spin(-100);
+  /*tilter::spin(-100);
   while(tilter::m.torque() < 1.9) {}
   tilter::reset();
   arm::move(150, 100, .8, 5, 100);
   arm::m.spin(fwd, -100, pct);
   while(arm::m.torque() < 2.05) {}
   arm::reset();
-  auton::resetAll();
+  auton::resetAll();*/
 
-  driveTask = task(drive::op);
+  /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
   while (1) {
     wait(5, msec);
-  }
+  }*/
 }
 
 void usercontrol(void) {
+  timer clown;
+  auton::small(auton::blue);
+  printf("%f\n", clown.time(msec));
   //driverMatch();
-  driverSkills();
+  //driverSkills();
   //auton::small(auton::blue);
   /*
   driveTask = task(drive::op);

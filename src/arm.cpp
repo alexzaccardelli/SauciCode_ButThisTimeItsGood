@@ -2,7 +2,7 @@
 using namespace vex;
 
 namespace arm {
-  motor m = motor(PORT13, ratio36_1, false);
+  motor m = motor(PORT11, ratio36_1, false);
 
   void reset() {
     m.stop(coast);

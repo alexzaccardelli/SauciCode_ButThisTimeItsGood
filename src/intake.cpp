@@ -3,7 +3,7 @@ using namespace vex;
 
 namespace intake {
   motor l = motor(PORT12, ratio36_1, false);
-  motor r = motor(PORT11, ratio36_1, true);
+  motor r = motor(PORT21, ratio36_1, true);
 
   void reset() {
     l.stop(hold);

@@ -2,10 +2,10 @@
 using namespace vex;
 
 namespace drive {
-motor l1 = motor(PORT1, ratio18_1, false);
-motor l2 = motor(PORT17, ratio18_1, false);
-motor r1 = motor(PORT2, ratio18_1, true);
-motor r2 = motor(PORT14, ratio18_1, true);
+motor l1 = motor(PORT13, ratio18_1, false);
+motor l2 = motor(PORT19, ratio18_1, false);
+motor r1 = motor(PORT15, ratio18_1, true);
+motor r2 = motor(PORT16, ratio18_1, true);
 encoder enc = encoder(cpu.ThreeWirePort.C);
 
 void reset() {
@@ -73,7 +73,7 @@ int forwardEasy(double dist, double max, double kP) {
   double err = 0, vel = 0;
   timer t;
   while (1) {
-    err = ticks - enc.rotation(deg);
+    err = ticks - l1.rotation(deg);
 
     if (err * kP > max)
       vel = max;

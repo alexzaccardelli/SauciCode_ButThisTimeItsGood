@@ -28,11 +28,11 @@ namespace auton {
   void small(int side) {
     timer t;
     t.reset();
-    deployTray();
+    //deployTray();
     intake::spin(100);
-    drive::forwardEasy(43.5, 30.0, 0.25);
+    drive::forwardEasy(37, 50.0, 0.25);
     intake::reset();
-    drive::forwardEasy(-25, 80.0, 0.25);
+    drive::forwardEasy(-25, 50.0, 0.25);
     if(side == red) drive::turnEasy(131, 60.0);
     else drive::turnEasy(-123, 60.0);
     drive::spin(60);
@@ -40,13 +40,14 @@ namespace auton {
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(600, 100, .8, 15, 100);
+    tilter::move(640, 100, .8, 15, 100);
     tilter::move(850, 40, .8, 15, 100);
     drive::spin(-20);
+    wait(1000, msec);
     cpu.Screen.clearScreen();
     cpu.Screen.setCursor(5,5);
     cpu.Screen.print("%f", t.time(msec));
-    while(t.time(msec) < 15000) {}
+    //while(t.time(msec) < 15000) {}
     drive::reset();
   }
 

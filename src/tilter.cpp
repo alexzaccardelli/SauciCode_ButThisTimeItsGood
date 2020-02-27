@@ -2,7 +2,7 @@
 using namespace vex;
 
 namespace tilter {
-  motor m = motor(PORT16, ratio36_1, false);
+  motor m = motor(PORT20, ratio36_1, false);
   bool complete = false;
 
   void reset() {
