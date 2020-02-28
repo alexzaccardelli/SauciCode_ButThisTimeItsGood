@@ -25,11 +25,14 @@ namespace tilter {
       if(con.ButtonR1.pressing()) {
         intakeTask.suspend();
         stop(coast);
-        while(con.ButtonR1.pressing()) {
-          if(m.rotation(deg) < 400)
+        while(con.ButtonR1.pressing() && m.rotation(deg) < 1000) {
+          if(m.rotation(deg) < 500)
             m.spin(fwd, upVel, pct);
           else
             m.spin(fwd, upVel*k, pct);
+          if(b.pressing()) {
+            m.resetRotation();
+          }
         }
         stop();
         intakeTask.resume();
@@ -39,9 +42,15 @@ namespace tilter {
         stop(coast);
         while(con.ButtonR2.pressing()) {
           m.spin(fwd, downVel, pct);
+          if(b.pressing()) {
+            m.resetRotation();
+          }
         }
         stop();
         intakeTask.resume();
+      }
+      if(b.pressing()) {
+        m.resetRotation();
       }
       stop();
     }
@@ -54,7 +63,8 @@ namespace tilter {
     while(1) {
       err = ticks - m.rotation(deg);
 
-      if(err * kP > max) vel = max;
+      if(err > ticks/2) vel = 60;
+      else if(err * kP > max) vel = max;
       else if(err * kP < -max) vel = -max;
       else vel = err * kP;
 

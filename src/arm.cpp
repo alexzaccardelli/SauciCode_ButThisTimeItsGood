@@ -96,7 +96,7 @@ namespace arm {
 
       if(fabs(err) > range) t.reset();
       if(t.time(msec) > time) break;
-      if(t1.time(msec) > timeout) break;
+      //if(t1.time(msec) > timeout) break;
 
       wait(5, msec);
     }

@@ -53,29 +53,15 @@ void driverMatch() {
 }
 
 void usercontrol(void) {
-  timer clown;
+  /*timer clown;
   auton::small(auton::blue);
-  printf("%f\n", clown.time(msec));
-  /*timer t3;
-  auton::deployTray();
-  printf("%f\n", t3.time(msec));*/
-  
-  //driverSkills();
-  //auton::small(auton::blue);
-  /*
-  driveTask = task(drive::op);
-  intakeTask = task(intake::op);
-  tilterTask = task(tilter::op);
-  armTask = task(arm::op);
-  while (1) {
-    wait(5, msec);
-  }
-  */
+  printf("%f\n", clown.time(msec));*/
+  //driverMatch();
 }
 
 void pre_auton(void) {
   vexcodeInit();
-  auton::resetAll();
+  //auton::resetAll();
 }
 
 void autonomous(void) {
@@ -88,11 +74,15 @@ void autonomous(void) {
 }
 
 int main() {
-  Competition.autonomous(autonomous);
+  driverMatch();
+  /*timer t3;
+  tilter::move(1000, 30);
+  printf("%f   %f\n", tilter::m.rotation(deg), t3.time(msec));*/
+  /*Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
   pre_auton();
 
   while (true)
-    wait(100, msec);
+    wait(100, msec);*/
 }
