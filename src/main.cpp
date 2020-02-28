@@ -41,7 +41,7 @@ void driverMatch() {
   arm::reset();
   auton::resetAll();*/
 
-  driveTask = task(drive::op);
+  /*driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
@@ -49,13 +49,14 @@ void driverMatch() {
   while (1) {
     printf("%f  %f\n", tilter::m.rotation(deg), arm::m.rotation(deg));
     wait(5, msec);
-  }
+  }*/
 }
 
 void usercontrol(void) {
   /*timer clown;
   auton::small(auton::blue);
   printf("%f\n", clown.time(msec));*/
+
   //driverMatch();
 }
 
@@ -74,7 +75,11 @@ void autonomous(void) {
 }
 
 int main() {
-  driverMatch();
+  timer clown;
+  auton::small(auton::blue);
+  printf("%f\n", clown.time(msec));
+  //driverMatch();
+  //usercontrol();
   /*timer t3;
   tilter::move(1000, 30);
   printf("%f   %f\n", tilter::m.rotation(deg), t3.time(msec));*/

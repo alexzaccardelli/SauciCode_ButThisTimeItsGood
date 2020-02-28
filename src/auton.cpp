@@ -21,15 +21,15 @@ namespace auton {
   void small(int side) {
     timer t;
     t.reset();
-    deployTray();
+    //deployTray();
     intake::spin(100);
     drive::forward(43.5, 40.0, 0.25);
     intake::reset();
     drive::forward(-25, 50.0, 0.25);
     if(side == red) drive::turn(131, 60.0);
-    else drive::turn(-123, 60.0);
+    else drive::turn(-138, 60.0);
     drive::spin(60);
-    wait(600, msec);
+    wait(750, msec);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
