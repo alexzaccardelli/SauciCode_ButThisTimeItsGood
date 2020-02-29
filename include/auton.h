@@ -7,6 +7,7 @@ namespace auton {
     red = -1,
     blue = 1
   };
+  extern bool complete;
 
   void resetAll();
   int deployTray();

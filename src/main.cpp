@@ -32,6 +32,10 @@ void driverSkills() {
 }
 
 void driverMatch() {
+  if(!auton::complete){
+    while(arm::m.torque() < 2.05) {}
+    arm::reset();
+  }
   /*tilter::spin(-100);
   while(tilter::m.torque() < 1.9) {}
   tilter::reset();

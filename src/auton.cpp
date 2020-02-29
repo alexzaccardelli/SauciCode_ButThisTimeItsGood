@@ -1,8 +1,9 @@
 #include "vex.h"
 using namespace vex;
 
-namespace auton {
 
+namespace auton {
+  bool complete = false;
   void resetAll() {
     drive::reset();
     intake::reset();
@@ -39,11 +40,20 @@ namespace auton {
     tilter::move(950, 40, .8, 15, 100);
     drive::spin(-20);
     wait(1000, msec);
+    drive::reset();
+    tilter::spin(-100);
+    while(tilter::m.torque() < 1.9) {}
+    tilter::reset();
+    wait(200, msec);
+    arm::m.spin(fwd, -100, pct);
+    while(arm::m.torque() < 2.05) {}
+    arm::reset();
+    if(t.time(msec)<15000) complete = true;
     cpu.Screen.clearScreen();
     cpu.Screen.setCursor(5,5);
     cpu.Screen.print("%f", t.time(msec));
     //while(t.time(msec) < 15000) {}
-    drive::reset();
+    
   }
 
   void big(int side) {
