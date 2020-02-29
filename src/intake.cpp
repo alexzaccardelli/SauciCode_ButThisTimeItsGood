@@ -23,7 +23,6 @@ namespace intake {
   }
 
   int op() {
-    double delay = 100;
     int last = 0;
     while(1) {
       if(con.ButtonL1.pressing()) {
@@ -38,7 +37,6 @@ namespace intake {
         while(con.ButtonL1.pressing()) {
           wait(5, msec);
         }
-        wait(delay, msec);
       }
       if(con.ButtonL2.pressing()) {
         if(last == 2) {
@@ -52,7 +50,6 @@ namespace intake {
         while(con.ButtonL2.pressing()) {
           wait(5, msec);
         }
-        wait(delay, msec);
       }
       wait(5, msec);
     }

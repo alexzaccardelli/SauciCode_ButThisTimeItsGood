@@ -13,6 +13,7 @@ namespace auton {
   int deployTray() {
     arm::move(400, 100, .8, 5, 100);
     arm::m.spin(fwd, -100, pct);
+    wait(500, msec);
     while(arm::m.torque() < 2.05) {}
     arm::reset();
     return 1;
@@ -21,20 +22,21 @@ namespace auton {
   void small(int side) {
     timer t;
     t.reset();
-    //deployTray();
+    deployTray();
     intake::spin(100);
-    drive::forward(43.5, 40.0, 0.25);
+    drive::forward(32, 40.0, 0.25);
     intake::reset();
-    drive::forward(-25, 50.0, 0.25);
-    if(side == red) drive::turn(131, 60.0);
+    drive::forward(-11.5, 50.0, 0.2);
+    if(side == red) drive::turn(200, 60.0);
     else drive::turn(-138, 60.0);
     drive::spin(60);
-    wait(750, msec);
+    wait(900, msec);
     drive::reset();
+    intake::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
     tilter::move(640, 100, .8, 15, 100);
-    tilter::move(850, 40, .8, 15, 100);
+    tilter::move(950, 40, .8, 15, 100);
     drive::spin(-20);
     wait(1000, msec);
     cpu.Screen.clearScreen();

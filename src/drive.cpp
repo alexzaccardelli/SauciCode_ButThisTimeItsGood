@@ -41,25 +41,65 @@ namespace drive {
 
   int op() {
     double y1, y2, x1, x2, lVel, rVel, k;
+    double accel = .8, decel = .3;
     while (1) {
       y1 = con.Axis3.position();
       y2 = con.Axis2.position();
       x1 = con.Axis4.position();
       x2 = con.Axis1.position();
-
-      if (fabs(y1 - y2) < 20) {
-        k = .75;
-        y1 = (y1 + y2) / 2;
-        y2 = (y1 + y2) / 2;
+      if(con.ButtonLeft.pressing()) {
+        decel = .3;
       }
-      else k = .25;
-      lVel = y1;
-      rVel = y2;
+      if(fabs(y1 - y2) < 20 && y1 > 0 && y2 > 0) {
+        k = .65;
+        if((y1 + y2) / 2 > lVel) {
+          lVel += accel;
+          rVel += accel;
+        }
+        else {
+          lVel = (y1 + y2) / 2 * k;
+          rVel = (y1 + y2) / 2 * k;
+        }
+      }
+      else if(fabs(y1 - y2) < 20 && y1 < 0 && y2 < 0) {
+        k =.5;
+        if((y1 + y2) / 2 < lVel) {
+          lVel -= decel;
+          rVel -= decel;
+        }
+        else {
+          lVel = (y1 + y2) / 2 * k;
+          rVel = (y1 + y2) / 2 * k;
+        }
+        //if(lVel < -50) lVel = -20;
+        //if(rVel < -50) rVel = -20;
+      }
+      else if(fabs(y1 - y2) > 20) {
+        k =.25;
+        lVel = y1 * k;
+        rVel = y2 * k;
+      }
+      else {
+        if(lVel > 0) {
+          lVel -= accel;
+        }
+        else if(lVel < 0) {
+          lVel += decel;
+        }
+        else lVel = 0;
+        if(rVel > 0) {
+          rVel -= accel;
+        }
+        else if(rVel < 0) {
+          rVel += decel;
+        }
+        else rVel = 0;
+      }
 
-      l1.spin(fwd, lVel * k, pct);
-      l2.spin(fwd, lVel * k, pct);
-      r1.spin(fwd, rVel * k, pct);
-      r2.spin(fwd, rVel * k, pct);
+      l1.spin(fwd, lVel, pct);
+      l2.spin(fwd, lVel, pct);
+      r1.spin(fwd, rVel, pct);
+      r2.spin(fwd, rVel, pct);
 
       wait(5, msec);
     }
@@ -124,7 +164,7 @@ namespace drive {
     drive::l2.spin(vex::fwd, speed, vex::pct);
     drive::r1.spin(vex::fwd, speed, vex::pct);
     drive::r2.spin(vex::fwd, speed, vex::pct);
-    wait(1, vex::sec);
+    wait(400, vex::sec);
     bool hit = false;
     while (!hit) {
       if (drive::l1.torque(vex::torqueUnits::InLb) > threshold ||
@@ -133,7 +173,7 @@ namespace drive {
           drive::r2.torque(vex::torqueUnits::InLb) > threshold)
         hit = true;
     }
-    wait(250,msec);
+    //wait(250,msec);
     reset();
   }
 }

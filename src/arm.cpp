@@ -45,7 +45,7 @@ namespace arm {
           pressCount = 1;
           intakeTask.suspend();
           intake::spin(-50);
-          wait(700, msec);
+          wait(350, msec);
           intake::reset();
           move(520, 50, .8, 5, 100);
           intakeTask.resume();
@@ -59,8 +59,8 @@ namespace arm {
           while(arm::m.torque() < 2.05) {}
           arm::stop();
           intake::spin(-50);
-          drive::spin(-80);
-          wait(500, msec);
+          drive::spin(-60);
+          wait(400, msec);
           drive::reset();
           intake::reset();
           driveTask.resume();
