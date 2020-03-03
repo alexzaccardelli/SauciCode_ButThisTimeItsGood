@@ -58,17 +58,17 @@ namespace auton {
     auton::deployTray();
     intake::spin(100);
     drive::forward(21, 40.0);
-    if(side == blue) { drive::turn(93, 75.0); }
+    if(side == blue) { drive::turn(135, 75.0); }
     else {drive::turn(-90, 75.0);}
     drive::forward(23,40.0);
     intake::reset();
-    if(side == blue) { drive::turn(45, 75.0); }
+    if(side == blue) { drive::turn(60, 75.0); }
     else {drive::turn(-45, 75.0);}
-    drive::forward(8, 60.0);
+    drive::forward(11, 60.0);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(640, 90, .8, 15, 100);
+    tilter::move(640, 100, .8, 15, 100);
     tilter::move(950, 40, .8, 15, 100);
     drive::spin(-20);
     wait(800, msec);

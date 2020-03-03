@@ -52,16 +52,19 @@ void driverMatch() {
   task a = task(drive::a);
   
   while (1) {
+    printf("%f\n", arm::m.torque());
     wait(5, msec);
   }
 }
 
 void usercontrol(void) {
-  driverMatch();
+  //driverMatch();
+  
+  
   timer clown;
-  auton::big(auton::red);
+  auton::big(auton::blue);
   printf("%f\n", clown.time(msec));
-
+  
   
 }
 
@@ -81,8 +84,11 @@ void autonomous(void) {
 }
 
 int main() {
-  
-  Competition.autonomous(autonomous);
+  /*timer clown;
+  auton::big(auton::red);
+  printf("%f\n", clown.time(msec));*/
+
+  //Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
   pre_auton();
