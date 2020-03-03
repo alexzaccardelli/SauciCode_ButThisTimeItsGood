@@ -52,26 +52,24 @@ namespace auton {
     cpu.Screen.clearScreen();
     cpu.Screen.setCursor(5,5);
     cpu.Screen.print("%f", t.time(msec));
-    //while(t.time(msec) < 15000) {}
-    
   }
 
   void big(int side) {
     auton::deployTray();
     intake::spin(100);
-    drive::forward(21, 35.0);
+    drive::forward(21, 40.0);
     if(side == blue) { drive::turn(93, 75.0); }
     else {drive::turn(-90, 75.0);}
-    drive::forward(23,35.0);
+    drive::forward(23,40.0);
     intake::reset();
     if(side == blue) { drive::turn(45, 75.0); }
-    else {drive::turn(-30, 75.0);}
+    else {drive::turn(-45, 75.0);}
     drive::forward(8, 60.0);
     drive::reset();
     intake::l.stop(coast);
     intake::r.stop(coast);
-    tilter::move(600, 90, .8, 15, 100);
-    tilter::move(850, 40, .8, 15, 100);
+    tilter::move(640, 90, .8, 15, 100);
+    tilter::move(950, 40, .8, 15, 100);
     drive::spin(-20);
     wait(800, msec);
     drive::reset();

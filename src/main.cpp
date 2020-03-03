@@ -32,10 +32,10 @@ void driverSkills() {
 }
 
 void driverMatch() {
-  if(!auton::complete){
+  /*if(!auton::complete){
     while(arm::m.torque() < 2.05) {}
     arm::reset();
-  }
+  }*/
   /*tilter::spin(-100);
   while(tilter::m.torque() < 1.9) {}
   tilter::reset();
@@ -49,6 +49,7 @@ void driverMatch() {
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
+  task a = task(drive::a);
   
   while (1) {
     wait(5, msec);
@@ -56,10 +57,9 @@ void driverMatch() {
 }
 
 void usercontrol(void) {
-  //driverMatch();
+  driverMatch();
   timer clown;
-  auton::small(auton::red);
-  //auton::deployTray();
+  auton::big(auton::red);
   printf("%f\n", clown.time(msec));
 
   

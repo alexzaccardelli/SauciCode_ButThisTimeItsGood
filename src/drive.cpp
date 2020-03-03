@@ -6,6 +6,7 @@ namespace drive {
   motor l2 = motor(PORT19, ratio18_1, false);
   motor r1 = motor(PORT15, ratio18_1, true);
   motor r2 = motor(PORT16, ratio18_1, true);
+  bool b = false;
 
   void reset() {
     l1.stop(coast);
@@ -39,6 +40,26 @@ namespace drive {
     l2.spin(fwd, vel, pct);
   }
 
+  int a() {
+    int last = 0;
+    while(1) {
+      if(con.ButtonLeft.pressing()) {
+        if(last == 1) {
+          last = 0;
+          b = true;
+        }
+        else {
+          last = 1;
+          b = false;
+        }
+        while(con.ButtonLeft.pressing()) {
+          wait(5, msec);
+        }
+      }
+      wait(5, msec);
+    }
+  }
+
   int op() {
     double y1, y2, x1, x2, lVel, rVel, k;
     double accel = .8, decel = .3;
@@ -47,9 +68,7 @@ namespace drive {
       y2 = con.Axis2.position();
       x1 = con.Axis4.position();
       x2 = con.Axis1.position();
-      if(con.ButtonLeft.pressing()) {
-        decel = .3;
-      }
+      
       if(fabs(y1 - y2) < 20 && y1 > 0 && y2 > 0) {
         k = .65;
         if((y1 + y2) / 2 > lVel) {
@@ -61,18 +80,39 @@ namespace drive {
           rVel = (y1 + y2) / 2 * k;
         }
       }
-      else if(fabs(y1 - y2) < 20 && y1 < 0 && y2 < 0) {
-        k =.5;
+      else if(fabs(y1 - y2) < 20 && y1 < 0 && y2 < 0 && b) {
+        k =.20;
         if((y1 + y2) / 2 < lVel) {
           lVel -= decel;
           rVel -= decel;
+        }
+        if(lVel < -20) {
+            lVel = -20;
+          }
+          if(rVel < -20) {
+            rVel = -20;
+          }
+        else {
+          lVel = (y1 + y2) / 2 * k;
+          rVel = (y1 + y2) / 2 * k;
+        }
+      }
+      else if(fabs(y1 - y2) < 20 && y1 < 0 && y2 < 0 && !b) {
+        k =.75;
+        if((y1 + y2) / 2 < lVel) {
+          lVel -= decel;
+          rVel -= decel;
+          if(lVel < -75) {
+            lVel = -75;
+          }
+          if(rVel < -75) {
+            rVel = -75;
+          }
         }
         else {
           lVel = (y1 + y2) / 2 * k;
           rVel = (y1 + y2) / 2 * k;
         }
-        //if(lVel < -50) lVel = -20;
-        //if(rVel < -50) rVel = -20;
       }
       else if(fabs(y1 - y2) > 20) {
         k =.25;

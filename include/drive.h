@@ -18,6 +18,7 @@ namespace drive {
   int forward(double dist, double max, double kP=0.2, double range=10, double time=200, double timeout=5000);
 
   int op();
+  int a();
 }
 
 #endif
