@@ -113,9 +113,15 @@ namespace auton {
     drive::forward(105, 40.0, 0.25, 10, 200, 100000);
     wait(500, msec);
     drive::turn(-45, 30.0);
+    wait(500, msec);
     intake::reset();
-    drive::spin(60);
-    wait(900, msec);
+    drive::spin(20);
+    wait(2000, msec);
+    drive::reset();
+    tilter::move(640, 100, .8, 15, 100);
+    tilter::move(950, 15, .8, 15, 100);
+    drive::spin(-20);
+    wait(1000, msec);
     drive::reset();
   }
 }

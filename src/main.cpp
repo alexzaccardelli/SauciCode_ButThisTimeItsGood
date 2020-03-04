@@ -58,14 +58,10 @@ void driverMatch() {
 }
 
 void usercontrol(void) {
-  driverMatch();
-  
-  
+  //driverMatch();
   timer clown;
   auton::skills();
   printf("%f\n", clown.time(msec));
-  
-  
 }
 
 void pre_auton(void) {
@@ -75,20 +71,12 @@ void pre_auton(void) {
 
 void autonomous(void) {
   auton::resetAll();
-  
-  //auton::onePoint();
   wait(200, msec);
-  
-  //auton::skills();
   auton::resetAll();
 }
 
 int main() {
-  /*timer clown;
-  auton::big(auton::red);
-  printf("%f\n", clown.time(msec));*/
-
-  //Competition.autonomous(autonomous);
+  Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
   pre_auton();
