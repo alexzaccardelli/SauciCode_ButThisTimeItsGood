@@ -58,7 +58,7 @@ void driverMatch() {
 }
 
 void usercontrol(void) {
-  //driverMatch();
+  driverMatch();
   timer clown;
   auton::skills();
   printf("%f\n", clown.time(msec));

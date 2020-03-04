@@ -64,6 +64,12 @@ namespace drive {
     double y1, y2, x1, x2, lVel, rVel, k;
     double accel = .8, decel = .3;
     while (1) {
+      if(con.ButtonRight.pressing()) {
+        while(con.ButtonRight.pressing()) {
+          spin(40);
+        }
+        reset();
+      }
       y1 = con.Axis3.position();
       y2 = con.Axis2.position();
       x1 = con.Axis4.position();
