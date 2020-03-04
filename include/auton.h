@@ -16,7 +16,7 @@ namespace auton {
   void small(int side);
   void big(int side);
 
-  int skills();
+  void skills();
   int tower();
 }
 

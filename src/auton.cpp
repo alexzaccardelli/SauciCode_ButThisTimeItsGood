@@ -75,10 +75,6 @@ namespace auton {
     drive::reset();
   }
 
-  int skills() {
-    return 1;
-  }
-
   void onePoint(){
     drive::spin(-50);
     wait(500, msec);
@@ -105,5 +101,21 @@ namespace auton {
     arm::m.spin(fwd, -100, pct);
     wait(100, msec);
     return 0; 
+  }
+  
+  void skills() {
+    drive::forward(12, 40.0);
+    drive::spin(-30);
+    wait(1000, msec);
+    drive::reset();
+    deployTray();
+    intake::spin(100);
+    drive::forward(105, 40.0, 0.25, 10, 200, 100000);
+    wait(500, msec);
+    drive::turn(-45, 30.0);
+    intake::reset();
+    drive::spin(60);
+    wait(900, msec);
+    drive::reset();
   }
 }
