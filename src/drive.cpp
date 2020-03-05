@@ -64,8 +64,8 @@ namespace drive {
     double y1, y2, x1, x2, lVel, rVel, k;
     double accel = .8, decel = .3;
     while (1) {
-      if(con.ButtonRight.pressing()) {
-        while(con.ButtonRight.pressing()) {
+      if(con.ButtonDown.pressing()) {
+        while(con.ButtonDown.pressing()) {
           spin(40);
         }
         reset();

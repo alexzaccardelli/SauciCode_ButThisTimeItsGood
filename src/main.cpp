@@ -4,7 +4,7 @@ using namespace vex;
 competition Competition;
 vex::brain cpu;
 controller con;
-task driveTask, intakeTask, tilterTask, armTask, autonTask;
+task driveTask, intakeTask, tilterTask, armTask, autonTask, a, stopperTask;
 
 void driverSkills() {
   //drive::l1.vex::spin(50);
@@ -49,7 +49,8 @@ void driverMatch() {
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
-  task a = task(drive::a);
+  a = task(drive::a);
+  stopperTask = task(arm::stopper);
   
   while (1) {
     printf("%f\n", arm::m.torque());

@@ -3,6 +3,7 @@ using namespace vex;
 
 namespace arm {
   motor m = motor(PORT11, ratio36_1, true);
+  bool b = false;
 
   void reset() {
     m.stop(coast);
@@ -13,6 +14,20 @@ namespace arm {
   }
   void spin(double vel) {
     m.spin(fwd, vel, pct);
+  }
+
+  int stopper() {
+    /*while(1) {
+      if(con.ButtonUp.pressing()) {
+        b = false;
+        stop();
+        armTask.stop();
+        wait(100, msec);
+        armTask.resume();
+      }
+      wait(5, msec);
+    }*/
+    return 1;
   }
 
   int op() {
@@ -45,7 +60,7 @@ namespace arm {
           pressCount = 1;
           intakeTask.suspend();
           intake::spin(-50);
-          wait(350, msec);
+          wait(450, msec);
           intake::reset();
           move(520, 50, .8, 5, 100);
           intakeTask.resume();
