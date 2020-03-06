@@ -18,6 +18,8 @@ namespace auton {
 
   void skills();
   int tower();
+
+  int deployButton();
 }
 
 #endif

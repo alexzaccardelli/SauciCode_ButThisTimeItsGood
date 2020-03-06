@@ -19,6 +19,22 @@ namespace auton {
     arm::reset();
     return 1;
   }
+
+  int deployButton() {
+    while(1) {
+      if(con.ButtonA.pressing()) {
+        armTask.suspend();
+        intakeTask.suspend();
+        tilterTask.suspend();
+        driveTask.suspend();
+        deployTray();
+        armTask.resume();
+        intakeTask.resume();
+        tilterTask.resume();
+        driveTask.resume();
+      }
+    }
+  }
   
   void small(int side) {
     timer t;
@@ -28,8 +44,8 @@ namespace auton {
     drive::forward(32, 40.0, 0.25);
     intake::reset();
     drive::forward(-11.5, 50.0, 0.2);
-    if(side == red) drive::turn(200, 60.0);
-    else drive::turn(-138, 60.0);
+    if(side == red) drive::turn(191, 60.0);
+    else drive::turn(-145, 60.0);
     drive::spin(60);
     wait(900, msec);
     drive::reset();
@@ -62,7 +78,7 @@ namespace auton {
     else {drive::turn(-90, 75.0);}
     drive::forward(23,40.0);
     intake::reset();
-    if(side == blue) { drive::turn(60, 75.0); }
+    if(side == blue) { drive::turn(48, 75.0); }
     else {drive::turn(-45, 75.0);}
     drive::forward(11, 60.0);
     drive::reset();
